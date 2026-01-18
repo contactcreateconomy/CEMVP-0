@@ -1,0 +1,29 @@
+---
+description: Essential development workflow
+alwaysApply: true
+---
+
+# Core Workflow
+
+## Planning
+- Use Plan Mode for complex tasks
+- Clarify requirements before coding
+- Break into vertical slices
+
+## Implementation
+- Write tests first (TDD)
+- Run ESLint MCP after changes
+- Use Context7 MCP for unfamiliar APIs
+- Maintain strict TypeScript (no `any`)
+
+## Quality
+- Always lint before committing
+- Keep functions small and focused
+- Use TypeScript types everywhere
+- Handle errors with try-catch
+
+## Git
+- Use feature branches
+- Commit frequently with clear messages
+- Keep PRs small
+- Run tests before pushing

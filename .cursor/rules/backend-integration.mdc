@@ -1,0 +1,129 @@
+---
+description: Rules for using Convex and Stripe MCP servers
+alwaysApply: true
+---
+
+# Backend Integration Rules
+
+## Convex MCP Server Usage
+
+### Database Operations
+
+1. **Always validate input** before Convex operations using Zod or similar
+2. **Use proper indexes** for frequently queried fields
+3. **Batch operations** when possible for efficiency
+4. **Handle errors gracefully** with try-catch blocks
+5. **Use Convex's type safety** - define schemas for all documents
+6. **Implement proper relationships** between related documents
+7. **Use pagination** for large result sets
+
+### Convex Functions
+
+1. **Separate queries** from mutations and actions
+2. **Keep functions focused** on single operations
+3. **Use proper auth checks** in all user-accessible functions
+4. **Validate user permissions** before data access
+5. **Use Convex's context** for auth and database access
+6. **Implement proper caching** with revalidation strategies
+7. **Use transactions** for multi-document operations
+
+### Schema Design
+
+1. **Define clear schemas** for all collections
+2. **Use appropriate types** for all fields
+3. **Add validation rules** to schemas
+4. **Document relationships** between collections
+5. **Use optional fields** sparingly - prefer default values
+6. **Index fields** used in queries and filters
+7. **Consider denormalization** for read-heavy workloads
+
+## Stripe MCP Server Usage
+
+### Payment Flows
+
+1. **Always use test mode** during development
+2. **Never hardcode Stripe keys** - use environment variables
+3. **Validate webhook signatures** for all webhook handlers
+4. **Handle Stripe errors** gracefully with user-friendly messages
+5. **Use proper HTTP methods** for Stripe API calls
+6. **Implement idempotency keys** for idempotent operations
+7. **Store Stripe IDs** in your database for reference
+
+### Webhook Handling
+
+1. **Verify webhook signatures** before processing
+2. **Handle webhook events** asynchronously
+3. **Retry failed webhook processing**
+4. **Log all webhook events** for debugging
+5. **Implement idempotency** for webhook handlers
+6. **Handle edge cases** like duplicate events
+7. **Test webhook handlers** locally with Stripe CLI
+
+### Customer Management
+
+1. **Create Stripe customers** at user registration
+2. **Sync customer data** with Stripe when changes occur
+3. **Handle customer deletion** and data cleanup
+4. **Use metadata** to store application-specific customer info
+5. **Implement proper error handling** for customer operations
+6. **Use proper search** for finding customers
+
+### Payment Processing
+
+1. **Use PaymentIntents** for payment processing
+2. **Handle 3D Secure** authentication flows
+3. **Implement proper error messages** for payment failures
+4. **Store payment status** in your database
+5. **Handle payment methods** and saved cards
+6. **Implement proper refunds** and dispute handling
+7. **Use proper currency** handling for international payments
+
+### Subscription Management
+
+1. **Use Subscriptions API** for recurring payments
+2. **Handle subscription lifecycle** events properly
+3. **Implement trial periods** and promotional offers
+4. **Handle subscription upgrades** and downgrades
+5. **Manage proration** correctly for plan changes
+6. **Handle failed payments** and dunning
+7. **Send proper notifications** for subscription events
+
+### Security Best Practices
+
+1. **Never expose secret keys** to client-side code
+2. **Use Stripe Elements** for card input
+3. **Implement proper PCI compliance**
+4. **Use restricted API keys** with minimal permissions
+5. **Rotate API keys** regularly
+6. **Audit Stripe operations** in your application logs
+7. **Use proper authentication** for all Stripe operations
+
+### Testing
+
+1. **Use Stripe test cards** for testing
+2. **Test payment flows** thoroughly
+3. **Test webhook handlers** with Stripe CLI
+4. **Test error scenarios** - failed payments, expired cards, etc.
+5. **Test subscription lifecycle** events
+6. **Test edge cases** - concurrent payments, refunds, disputes
+7. **Use Stripe's test mode** for all development
+
+### Integration Patterns
+
+1. **Webhook-first design** for real-time updates
+2. **Poll as fallback** when webhooks are unreliable
+3. **Cache Stripe data** to reduce API calls
+4. **Implement proper retry logic** for failed requests
+5. **Use proper error handling** at all integration points
+6. **Monitor Stripe metrics** - success rates, errors, latency
+7. **Implement proper logging** for all Stripe operations
+
+## Combined Convex + Stripe Integration
+
+1. **Store Stripe IDs** in Convex documents
+2. **Use Convex for application state**, Stripe for payment state
+3. **Sync data carefully** - avoid race conditions
+4. **Implement proper transaction handling** across systems
+5. **Use webhooks** to keep Convex in sync with Stripe
+6. **Handle failures gracefully** - partial states, retries
+7. **Implement proper data cleanup** on account deletion

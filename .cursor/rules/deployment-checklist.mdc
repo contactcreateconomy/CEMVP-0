@@ -1,0 +1,25 @@
+---
+description: Deployment checklist
+alwaysApply: true
+---
+
+# Deployment Checklist
+
+## Pre-Deployment
+- All tests pass
+- ESLint passes (no errors)
+- Bundle size checked with Next DevTools MCP
+- Environment variables verified with Vercel MCP
+- Dependencies audited with NPM MCP
+
+## Deploy Process
+- Deploy to preview first
+- Test critical functionality
+- Monitor for errors
+- Deploy to production
+
+## Post-Deployment
+- Check deployment logs
+- Monitor error rates
+- Verify key user flows
+- Be ready to rollback

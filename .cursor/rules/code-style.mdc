@@ -1,0 +1,29 @@
+---
+description: Code style and TypeScript conventions
+alwaysApply: true
+---
+
+# Code Style
+
+## TypeScript
+- Use strict mode in tsconfig.json
+- Avoid `any` type → use `unknown` or proper types
+- Define interfaces for all data structures
+- Use proper return types on functions
+
+## Naming
+- Use descriptive variable/function names
+- PascalCase for components
+- camelCase for variables/functions
+- kebab-case for files/folders
+
+## Structure
+- One responsibility per function
+- Keep files small (<200 lines)
+- Extract reusable logic into hooks/utils
+- Use barrel files (index.ts) for clean imports
+
+## Comments
+- Comment only complex logic
+- No comments for obvious code
+- Document edge cases

@@ -1,0 +1,29 @@
+---
+description: MCP tool usage guidelines
+alwaysApply: true
+---
+
+# MCP Tools Usage
+
+## Quick Reference
+- **Context7** → Documentation & examples
+- **ESLint** → Code linting
+- **NPM** → Package management
+- **Next DevTools** → Next.js debugging
+- **Vercel** → Deployment
+- **Stripe** → Payments
+- **Shadcn** → UI components
+- **Convex** → Backend/database
+- **Vision** → Visual analysis
+
+## Workflow Order
+1. Planning: Context7 MCP
+2. Coding: Write code
+3. Quality: ESLint MCP
+4. Packages: NPM MCP (if needed)
+5. Debug: Next DevTools MCP (if needed)
+
+## Safety
+- Review ESLint auto-fixes before applying
+- Use Stripe test mode only
+- Never commit secrets
