@@ -1,0 +1,40 @@
+{
+  "name": "@createconomy/admin",
+  "version": "0.0.1",
+  "private": true,
+  "description": "CreateEconomy Admin Console - console.createconomy.com",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf .next node_modules"
+  },
+  "dependencies": {
+    "next": "^15.5.8",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "convex": "^1.0.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^2.5.5",
+    "lucide-react": "^0.468.0",
+    "@createconomy/ui": "workspace:*",
+    "@createconomy/types": "workspace:*",
+    "@createconomy/utils": "workspace:*",
+    "@createconomy/config": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.1",
+    "@types/react-dom": "^19.0.2",
+    "typescript": "^5.9.3",
+    "eslint": "^9.0.0",
+    "eslint-config-next": "^15.0.0",
+    "tailwindcss": "^4.1.14",
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.4.49"
+  }
+}
