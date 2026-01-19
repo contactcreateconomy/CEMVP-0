@@ -1,4 +1,4 @@
-# CreateEconomy Digital AI Workflow Marketplace
+## CreateEconomy Digital AI Workflow Marketplace
 
 CreateEconomy is a platform for discovering, purchasing, and deploying AI workflows across multiple domains. Built with Next.js, Turborepo, Convex, and shadcn/ui.
 
