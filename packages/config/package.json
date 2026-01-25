@@ -1,0 +1,15 @@
+{
+  "name": "@createconomy/config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./eslint": "./eslint.js",
+    "./tsconfig": "./tsconfig.json"
+  },
+  "scripts": {
+    "build": "echo 'No build needed for config package'"
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+.next
+.turbo
+dist
+build
+coverage
+.pnpm-store
+convex/_generated
+*.lock
+package-lock.json
+yarn.lock

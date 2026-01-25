@@ -1,5 +1,36 @@
 {
+  "name": "createconomy-monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "packageManager": "pnpm@10.28.0",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "convex:dev": "cd packages/convex && convex dev",
+    "convex:deploy": "cd packages/convex && convex deploy",
+    "convex:typecheck": "cd packages/convex && convex typecheck"
+  },
   "devDependencies": {
-    "shadcn": "^3.7.0"
+    "@eslint/compat": "^2.0.1",
+    "@eslint/js": "^9.39.2",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/node": "^22.13.14",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-next": "^0.0.0",
+    "prettier": "^3.5.3",
+    "turbo": "^2.7.6",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=24.0.0",
+    "pnpm": ">=10.0.0"
   }
 }

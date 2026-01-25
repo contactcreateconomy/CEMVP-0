@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "outDir": "./dist",
+    "rootDir": "./",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "types": ["node"],
+    "jsx": "react-jsx"
+  },
+  "include": ["*.ts", "*.tsx", "_generated/**/*.ts"],
+  "exclude": ["node_modules", "dist", "convex"]
+}
