@@ -1,5 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "env": {
+    "MAX_MCP_OUTPUT_TOKENS": "200000"
+  },
   "permissions": {
     "allow": [
       "Bash(npx create-next-app:*)",
@@ -54,7 +57,28 @@
       "Bash(claude mcp show:*)",
       "Bash(claude mcp:*)",
       "Bash(ls:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(powershell -Command \"Get-ChildItem -Path $env:APPDATA -Recurse -Filter ''*claude*'' -ErrorAction SilentlyContinue | Select-Object -First 10 FullName\")",
+      "Bash(cmd /c \"dir /s /b C:\\\\Users\\\\Suren\\\\*claude*config* 2>nul\")",
+      "Bash(cmd /c:*)",
+      "mcp__zread__search_doc",
+      "mcp__zread__read_file",
+      "mcp__shadcn__search_items_in_registries",
+      "Bash(tasklist:*)",
+      "Bash(where /r \"C:\\\\Program Files\" Figma.exe)",
+      "Bash(where /r \"C:\\\\Users\\\\Suren\\\\AppData\\\\Local\" Figma.exe)",
+      "mcp__figma__list_files",
+      "mcp__figma__get_file_info",
+      "mcp__figma__get_file_nodes",
+      "mcp__figma__get_styles",
+      "mcp__figma__get_components",
+      "mcp__zai-mcp-server__ui_to_artifact",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "mcp__plugin_playwright_playwright__browser_wait_for",
+      "mcp__plugin_playwright_playwright__browser_take_screenshot",
+      "mcp__plugin_playwright_playwright__browser_close",
+      "Bash(timeout 5 powershell:*)",
+      "Bash(powershell -Command \"Get-Content ''call_336233973035401d82ee8a1b.json'' | Select-String -Pattern ''name.*:.*\"\"'' | Select-Object -First 100\")"
     ]
   },
   "enableAllProjectMcpServers": true,

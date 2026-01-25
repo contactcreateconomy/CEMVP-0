@@ -6,6 +6,16 @@
         "shadcn@latest",
         "mcp"
       ]
+    },
+    "figma": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@hapins/figma-mcp"
+      ],
+      "env": {
+        "FIGMA_ACCESS_TOKEN": "figd_1_ztVjBwcuIhScN4y-D-q3fuOBiyrHxbWxME2dxD"
+      }
     }
   }
 }
