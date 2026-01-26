@@ -559,3 +559,15 @@ export const getStats = query({
     };
   },
 });
+
+// ============================================
+// AUTH FUNCTIONS
+// ============================================
+// Export auth functions from the auth module
+export {
+  signIn,
+  signUp,
+  getSession,
+  signOut,
+  cleanupExpiredSessions,
+} from "./convex/auth";

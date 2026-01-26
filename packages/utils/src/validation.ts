@@ -45,6 +45,35 @@ export const paginationSchema = z.object({
   pageSize: z.number().int().positive().max(100).default(20),
 });
 
+// Authentication validation schemas
+
+// Sign in validation
+export const signInSchema = z.object({
+  email: z.string().trim().email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
+});
+
+export type SignInInput = z.infer<typeof signInSchema>;
+
+// Sign up validation
+export const signUpSchema = z
+  .object({
+    name: z
+      .string()
+      .trim()
+      .min(2, "Name must be at least 2 characters")
+      .max(100, "Name too long"),
+    email: z.string().trim().email("Invalid email address"),
+    password: passwordSchema,
+    confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
+
+export type SignUpInput = z.infer<typeof signUpSchema>;
+
 // Export validation helpers
 export const validateEmail = (email: string) => emailSchema.safeParse(email);
 export const validatePassword = (password: string) => passwordSchema.safeParse(password);

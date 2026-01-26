@@ -1,10 +1,8 @@
-import { defineApp } from "convex/compat";
-import * as schema from "./schema";
-import * as functions from "./server";
+import { defineApp } from "convex/server";
+import auth from "./convex/auth";
+import server from "./server";
 
 export default defineApp({
-  schema: {
-    ...schema,
-  },
-  ...functions,
+  auth,
+  ...server,
 });

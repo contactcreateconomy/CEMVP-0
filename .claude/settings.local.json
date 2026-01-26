@@ -54,7 +54,11 @@
       "Bash(claude mcp show:*)",
       "Bash(claude mcp:*)",
       "Bash(ls:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(powershell -Command \"Get-Process -Id 7376,7536,13916,21448 -ErrorAction SilentlyContinue | Select-Object Id,ProcessName,Path\")",
+      "Bash(tasklist:*)",
+      "Bash(timeout:*)",
+      "Bash(copy:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

@@ -6,12 +6,30 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": "./dist/index.js",
-    "./format": "./dist/format.js",
-    "./validation": "./dist/validation.js",
-    "./tenant": "./dist/tenant.js",
-    "./logger": "./dist/logger.js",
-    "./errors": "./dist/errors.js"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./src/index.ts"
+    },
+    "./format": {
+      "import": "./dist/format.js",
+      "types": "./src/format.ts"
+    },
+    "./validation": {
+      "import": "./dist/validation.js",
+      "types": "./src/validation.ts"
+    },
+    "./tenant": {
+      "import": "./dist/tenant.js",
+      "types": "./src/tenant.ts"
+    },
+    "./logger": {
+      "import": "./dist/logger.js",
+      "types": "./src/logger.ts"
+    },
+    "./errors": {
+      "import": "./dist/errors.js",
+      "types": "./src/errors.ts"
+    }
   },
   "scripts": {
     "build": "tsup",

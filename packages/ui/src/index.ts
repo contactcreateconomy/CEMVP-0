@@ -9,5 +9,8 @@ export { Tabs, TabsList, TabsTrigger, TabsContent } from "./components/ui/tabs";
 export { Toast, ToastProvider, ToastTitle, ToastDescription, ToastViewport, ToastClose } from "./components/ui/toast";
 export { Separator } from "./components/ui/separator";
 
+// Auth Components
+export { SignIn, SignUp } from "./components/auth";
+
 // Utilities
 export { cn } from "./lib/utils";

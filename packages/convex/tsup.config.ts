@@ -1,7 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["server.ts", "client.tsx", "schema.ts"],
+  entry: ["server.ts", "client.tsx", "schema.ts", "hooks.ts"],
   format: ["esm"],
   dts: false,
   splitting: false,

@@ -6,9 +6,22 @@
   "main": "./dist/server.js",
   "types": "./dist/server.d.ts",
   "exports": {
-    "./server": "./dist/server.js",
-    "./client": "./dist/client.js",
-    "./schema": "./dist/schema.js"
+    "./server": {
+      "import": "./dist/server.js",
+      "types": "./server.ts"
+    },
+    "./client": {
+      "import": "./dist/client.js",
+      "types": "./client.tsx"
+    },
+    "./schema": {
+      "import": "./dist/schema.js",
+      "types": "./schema.ts"
+    },
+    "./hooks": {
+      "import": "./dist/hooks.js",
+      "types": "./hooks.ts"
+    }
   },
   "scripts": {
     "build": "tsup",
