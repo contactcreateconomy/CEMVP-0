@@ -58,7 +58,10 @@
       "Bash(powershell -Command \"Get-Process -Id 7376,7536,13916,21448 -ErrorAction SilentlyContinue | Select-Object Id,ProcessName,Path\")",
       "Bash(tasklist:*)",
       "Bash(timeout:*)",
-      "Bash(copy:*)"
+      "Bash(copy:*)",
+      "Bash(ssh-keygen:*)",
+      "Bash(powershell -c \"Start-Service ssh-agent 2>$null; ssh-add C:/Users/Suren/.ssh/id_ed25519\")",
+      "Bash(powershell.exe -Command \"Start-Service ssh-agent; ssh-add $env:USERPROFILE\\\\.ssh\\\\id_ed25519\")"
     ]
   },
   "enableAllProjectMcpServers": true,
