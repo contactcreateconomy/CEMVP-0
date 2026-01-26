@@ -62,3 +62,6 @@ bundle-analysis/
 
 # Plan files
 PLAN.md
+
+# MCP config with secrets
+mcp.json
