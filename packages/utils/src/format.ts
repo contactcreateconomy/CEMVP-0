@@ -81,3 +81,21 @@ export function slugify(text: string): string {
     .replace(/-+/g, "-")
     .trim();
 }
+
+/**
+ * Get badge gradient color from level
+ */
+export function getBadgeColor(level: string): string {
+  switch (level) {
+    case "platinum":
+      return "bg-gradient-to-r from-slate-200 to-slate-400";
+    case "gold":
+      return "bg-gradient-to-r from-yellow-400 to-amber-500";
+    case "silver":
+      return "bg-gradient-to-r from-gray-300 to-gray-400";
+    case "bronze":
+      return "bg-gradient-to-r from-amber-600 to-orange-600";
+    default:
+      return "bg-muted";
+  }
+}

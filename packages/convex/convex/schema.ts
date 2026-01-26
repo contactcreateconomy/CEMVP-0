@@ -1,4 +1,4 @@
-import { defineTable } from "convex/server";
+import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
 
 // Users table
@@ -8,11 +8,14 @@ export const users = defineTable({
   emailVerified: v.optional(v.boolean()),
   image: v.optional(v.string()),
   role: v.string(), // "customer" | "seller" | "admin"
+  username: v.optional(v.string()), // @username handle
+  bio: v.optional(v.string()), // User bio
   tenantId: v.optional(v.id("tenants")),
   createdAt: v.number(),
   updatedAt: v.number(),
 })
   .index("by_email", ["email"])
+  .index("by_username", ["username"])
   .index("by_tenant", ["tenantId"]);
 
 // Tenants table for multitenancy
@@ -92,6 +95,8 @@ export const forumPosts = defineTable({
   views: v.number(),
   pinned: v.boolean(),
   locked: v.boolean(),
+  aiSummary: v.optional(v.string()), // AI-generated summary
+  previewImage: v.optional(v.string()), // Optional preview image URL
   createdAt: v.number(),
   updatedAt: v.number(),
 })
@@ -113,6 +118,81 @@ export const forumComments = defineTable({
   .index("by_author", ["authorId"])
   .index("by_parent", ["parentId"]);
 
+// Forum categories with icons and colors for left sidebar
+export const forumCategories = defineTable({
+  tenantId: v.id("tenants"),
+  name: v.string(),
+  slug: v.string(),
+  description: v.optional(v.string()),
+  icon: v.string(), // lucide-react icon name: "Code", "Palette", "Rocket", etc.
+  color: v.string(), // Tailwind color class: "bg-blue-500", "bg-pink-500", etc.
+  order: v.number(),
+  createdAt: v.number(),
+  updatedAt: v.number(),
+})
+  .index("by_tenant", ["tenantId"])
+  .index("by_slug", ["slug"]);
+
+// User bookmarks for posts
+export const forumBookmarks = defineTable({
+  userId: v.id("users"),
+  postId: v.id("forumPosts"),
+  createdAt: v.number(),
+})
+  .index("by_user", ["userId"])
+  .index("by_post", ["postId"]);
+
+// Track individual likes (replaces simple counter)
+export const forumPostLikes = defineTable({
+  userId: v.id("users"),
+  postId: v.id("forumPosts"),
+  createdAt: v.number(),
+})
+  .index("by_user", ["userId"])
+  .index("by_post", ["postId"]);
+
+// User reputation for leaderboard
+export const userReputation = defineTable({
+  userId: v.id("users"),
+  tenantId: v.id("tenants"),
+  points: v.number(),
+  level: v.string(), // "bronze", "silver", "gold", "platinum"
+  postsCreated: v.number(),
+  commentsCreated: v.number(),
+  likesReceived: v.number(),
+  createdAt: v.number(),
+  updatedAt: v.number(),
+})
+  .index("by_user", ["userId"])
+  .index("by_tenant", ["tenantId"])
+  .index("by_points", ["points"]);
+
+// Gamification campaigns
+export const forumCampaigns = defineTable({
+  tenantId: v.id("tenants"),
+  title: v.string(),
+  description: v.string(),
+  prize: v.string(),
+  targetPoints: v.number(),
+  currentProgress: v.number(),
+  startDate: v.number(),
+  endDate: v.number(),
+  isActive: v.boolean(),
+  createdAt: v.number(),
+  updatedAt: v.number(),
+})
+  .index("by_tenant", ["tenantId"])
+  .index("by_active", ["isActive"]);
+
+// Campaign participants
+export const campaignParticipants = defineTable({
+  userId: v.id("users"),
+  campaignId: v.id("forumCampaigns"),
+  joinedAt: v.number(),
+})
+  .index("by_user", ["userId"])
+  .index("by_campaign", ["campaignId"]);
+
 // Stripe prices mapping
 export const stripePrices = defineTable({
   productId: v.id("products"),
@@ -132,3 +212,21 @@ export const sessions = defineTable({
 })
   .index("by_user", ["userId"])
   .index("by_expiration", ["expiresAt"]);
+
+// Default export for Convex v2
+export default defineSchema({
+  users,
+  tenants,
+  products,
+  orders,
+  forumPosts,
+  forumComments,
+  forumCategories,
+  forumBookmarks,
+  forumPostLikes,
+  userReputation,
+  forumCampaigns,
+  campaignParticipants,
+  stripePrices,
+  sessions,
+});

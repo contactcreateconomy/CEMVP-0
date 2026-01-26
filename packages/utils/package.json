@@ -11,7 +11,8 @@
     "./validation": "./dist/validation.js",
     "./tenant": "./dist/tenant.js",
     "./logger": "./dist/logger.js",
-    "./errors": "./dist/errors.js"
+    "./errors": "./dist/errors.js",
+    "./hooks": "./dist/hooks/index.js"
   },
   "scripts": {
     "build": "tsup",
@@ -21,10 +22,14 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "zod": "^3.24.2"
+    "zod": "^3.24.2",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.2.0",
+    "react": "^19.2.3"
   },
   "devDependencies": {
     "@types/node": "^22.13.14",
+    "@types/react": "^19.2.0",
     "tsup": "^8.4.0",
     "typescript": "^5.8.3",
     "vitest": "^3.1.2"

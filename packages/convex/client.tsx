@@ -55,5 +55,34 @@ export function ConvexAppProvider({
 // Re-export Convex utilities for convenience
 export { useQuery, useMutation, useAction } from "convex/react";
 
+// Re-export ID types from Convex
+export type { Id } from "convex/server";
+
 // Re-export API types
 export type { DataModel } from "./_generated/server";
+
+// IMPORTANT: Do not re-export api from server.ts - it contains server-side
+// function implementations that should not be bundled for the browser.
+// Client components should import function references from the generated API.
+// The generated API uses 'anyApi' as a fallback when types can't be inferred.
+//
+// To properly fix this, the functions need to be in individual files in
+// packages/convex/convex/ directory for codegen to pick them up.
+
+// Re-export types from packages/types for convenience
+export type {
+  User,
+  ForumPost,
+  ForumPostEnhanced,
+  ForumComment,
+  ForumCategory,
+  ForumBookmark,
+  UserReputation,
+  ForumCampaign,
+  CampaignParticipant,
+  LeaderboardEntry,
+} from "@createconomy/types";
+
+// Export the generated API (currently uses anyApi fallback)
+// This will be properly typed once functions are moved to convex/ directory
+export { api } from "./convex/_generated/api";

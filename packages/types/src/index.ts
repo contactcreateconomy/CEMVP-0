@@ -9,6 +9,7 @@ export interface User {
   emailVerified: boolean;
   image?: string;
   role: UserRole;
+  username?: string;
   tenantId?: string;
   createdAt: number;
   updatedAt: number;
@@ -92,6 +93,8 @@ export interface ForumPost {
   views: number;
   pinned: boolean;
   locked: boolean;
+  aiSummary?: string; // AI-generated summary
+  previewImage?: string; // Optional preview image URL
   createdAt: number;
   updatedAt: number;
 }
@@ -105,6 +108,87 @@ export interface ForumComment {
   parentId?: string;
   createdAt: number;
   updatedAt: number;
+}
+
+// Forum category with icon and color
+export interface ForumCategory {
+  _id: string;
+  tenantId: string;
+  name: string;
+  slug: string;
+  description?: string;
+  icon: string; // lucide-react icon name: "Code", "Palette", "Rocket", etc.
+  color: string; // Tailwind color class: "bg-blue-500", "bg-pink-500", etc.
+  order: number;
+  createdAt: number;
+  updatedAt: number;
+}
+
+// Forum bookmark
+export interface ForumBookmark {
+  _id: string;
+  userId: string;
+  postId: string;
+  createdAt: number;
+}
+
+// User reputation for leaderboard
+export interface UserReputation {
+  _id: string;
+  userId: string;
+  tenantId: string;
+  points: number;
+  level: "bronze" | "silver" | "gold" | "platinum";
+  postsCreated: number;
+  commentsCreated: number;
+  likesReceived: number;
+  createdAt: number;
+  updatedAt: number;
+}
+
+// Gamification campaign
+export interface ForumCampaign {
+  _id: string;
+  tenantId: string;
+  title: string;
+  description: string;
+  prize: string;
+  targetPoints: number;
+  currentProgress: number;
+  startDate: number;
+  endDate: number;
+  isActive: boolean;
+  createdAt: number;
+  updatedAt: number;
+}
+
+// Campaign participant
+export interface CampaignParticipant {
+  _id: string;
+  userId: string;
+  campaignId: string;
+  joinedAt: number;
+}
+
+// Leaderboard entry
+export interface LeaderboardEntry {
+  _id: string;
+  userId: string;
+  tenantId: string;
+  points: number;
+  level: "bronze" | "silver" | "gold" | "platinum";
+  postsCreated: number;
+  commentsCreated: number;
+  likesReceived: number;
+  user?: User; // Populated user info
+}
+
+// Enhanced forum post with related data
+export interface ForumPostEnhanced extends ForumPost {
+  author?: User; // Populated author info
+  commentCount?: number; // Populated comment count
+  isLiked?: boolean; // Whether current user liked this post
+  isBookmarked?: boolean; // Whether current user bookmarked this post
 }
 
 // Stripe types

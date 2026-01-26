@@ -1,6 +1,6 @@
 {
+  "$schema": "./node_modules/convex/schemas/convex.schema.json",
   "project": "mellow-scorpion-788",
   "team": "",
-  "prodDeployment": "cloud",
-  "devDeployment": "cloud"
+  "functions": "convex/"
 }

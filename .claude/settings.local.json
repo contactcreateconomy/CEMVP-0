@@ -54,7 +54,18 @@
       "Bash(claude mcp show:*)",
       "Bash(claude mcp:*)",
       "Bash(ls:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "Bash(tree:*)",
+      "Bash(timeout:*)",
+      "mcp__filesystem__read_text_file",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__plugin_playwright_playwright__browser_navigate",
+      "Bash(cmd //c \"taskkill //F //PID 15108\")",
+      "Bash(powershell -Command \"Stop-Process -Id 15108 -Force\")",
+      "Bash(powershell -ExecutionPolicy Bypass -Command \"Stop-Process -Id 15108 -Force\")",
+      "Bash(powershell -Command \"Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser\")",
+      "Bash(powershell:*)",
+      "Bash(cmd //c \"start //B pnpm dev\")"
     ]
   },
   "enableAllProjectMcpServers": true,

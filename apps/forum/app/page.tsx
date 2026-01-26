@@ -1,22 +1,75 @@
+"use client";
+
+import { useState } from "react";
+import { Navbar } from "@/components/forum/navbar";
+import { LeftSidebar } from "@/components/forum/left-sidebar";
+import { DiscussionFeed } from "@/components/forum/discussion-feed";
+import { RightSidebar } from "@/components/forum/right-sidebar";
+import { cn } from "@createconomy/utils";
+
 export default function HomePage() {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>(null);
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-center font-mono text-sm">
-        <h1 className="text-4xl font-bold text-center mb-8">
-          Welcome to Createconomy Forum
-        </h1>
-        <p className="text-center text-gray-600 mb-8">
-          Community discussions for creators
-        </p>
-        <div className="flex justify-center gap-4">
-          <button className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700">
-            Browse Topics
-          </button>
-          <button className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-100">
-            New Post
-          </button>
+    <div className="min-h-screen bg-background font-sans">
+      {/* Navbar */}
+      <Navbar
+        onMobileMenuToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        isMobileMenuOpen={isMobileMenuOpen}
+      />
+
+      {/* Main Content */}
+      <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="flex gap-6">
+          {/* Left Sidebar - Desktop */}
+          <div className="hidden w-[250px] shrink-0 lg:block">
+            <div className="sticky top-24">
+              <LeftSidebar
+                selectedCategoryName={selectedCategoryName}
+                onCategoryChange={setSelectedCategoryName}
+              />
+            </div>
+          </div>
+
+          {/* Mobile Sidebar Overlay */}
+          <div
+            className={cn(
+              "fixed inset-0 z-40 bg-foreground/50 transition-opacity duration-300 lg:hidden",
+              isMobileMenuOpen ? "opacity-100" : "pointer-events-none opacity-0"
+            )}
+            onClick={() => setIsMobileMenuOpen(false)}
+            onKeyDown={(e) => e.key === "Escape" && setIsMobileMenuOpen(false)}
+          />
+
+          {/* Mobile Sidebar */}
+          <div
+            className={cn(
+              "fixed inset-y-0 left-0 z-50 w-[280px] transform bg-card shadow-xl transition-transform duration-300 ease-out lg:hidden",
+              isMobileMenuOpen ? "translate-x-0" : "-translate-x-full"
+            )}
+          >
+            <div className="h-full overflow-y-auto pt-20">
+              <LeftSidebar
+                selectedCategoryName={selectedCategoryName}
+                onCategoryChange={setSelectedCategoryName}
+              />
+            </div>
+          </div>
+
+          {/* Center Feed */}
+          <main className="min-w-0 flex-1">
+            <DiscussionFeed categoryName={selectedCategoryName ?? undefined} />
+          </main>
+
+          {/* Right Sidebar - Desktop & Tablet */}
+          <div className="hidden w-[300px] shrink-0 xl:block">
+            <div className="sticky top-24">
+              <RightSidebar />
+            </div>
+          </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }

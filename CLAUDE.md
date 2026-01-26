@@ -37,11 +37,25 @@ pnpm --filter @createconomy/seller dev
 
 ### Convex Backend
 
+**CRITICAL: Use ONLY Development Environment**
+
+For ALL development and testing, use the Convex dev deployment. NEVER deploy to production during development.
+
 ```bash
-pnpm convex:dev          # Start Convex dev server (run in separate terminal)
-pnpm convex:deploy       # Deploy to Convex production
-pnpm convex:typecheck    # Type check Convex schema
+# From packages/convex directory
+npx convex dev           # Start dev server and sync functions (recommended)
+npx convex dev --once    # Sync functions once without watching
+npx convex dev --typecheck=disable  # Skip type checking during dev
+
+# NEVER use these in development:
+# npx convex deploy      # This deploys to PRODUCTION - DO NOT USE
 ```
+
+**Dev vs Production:**
+- Dev deployment: `mellow-scorpion-788` (set in CONVEX_DEPLOYMENT)
+- Prod deployment: `festive-pika-658` (NEVER deploy during development)
+
+The apps will automatically connect to the correct deployment based on `NEXT_PUBLIC_CONVEX_URL` environment variable.
 
 ### Build & Quality
 
