@@ -61,7 +61,8 @@
       "Bash(copy:*)",
       "Bash(ssh-keygen:*)",
       "Bash(powershell -c \"Start-Service ssh-agent 2>$null; ssh-add C:/Users/Suren/.ssh/id_ed25519\")",
-      "Bash(powershell.exe -Command \"Start-Service ssh-agent; ssh-add $env:USERPROFILE\\\\.ssh\\\\id_ed25519\")"
+      "Bash(powershell.exe -Command \"Start-Service ssh-agent; ssh-add $env:USERPROFILE\\\\.ssh\\\\id_ed25519\")",
+      "mcp__github__get_file_contents"
     ]
   },
   "enableAllProjectMcpServers": true,
