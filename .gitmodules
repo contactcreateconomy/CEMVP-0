@@ -1,0 +1,3 @@
+[submodule ".claude/everything-claude-code"]
+	path = .claude/everything-claude-code
+	url = https://github.com/contactcreateconomy/everything-claude-code.git
