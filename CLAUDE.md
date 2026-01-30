@@ -77,11 +77,6 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 
 **MCP Servers**: `.mcp.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, figma)
 
-**Project Commands** (auto-discovered from `.claude/commands/`):
-- `/convex-dev` - Convex backend development
-- `/multi-tenant` - Multi-tenant architecture
-- `/deploy-all` - Deploy all apps to production
-
 ## Important Notes
 
 - **Windows**: All apps use --webpack flag (Turbopack compatibility)
