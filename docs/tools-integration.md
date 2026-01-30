@@ -123,7 +123,10 @@ This project uses **project-specific MCP servers** configured in `.mcp.json` (co
 | `memory` | Project-specific knowledge graph | No |
 | `github` | GitHub operations (PRs, issues, repos) | Yes (GITHUB_TOKEN) |
 | `convex` | Convex database operations | No |
-| `context7` | Live documentation lookup | No |
+| `context7` | Live documentation lookup | Optional (CONTEXT7_API_KEY) |
+| `sequential-thinking` | Chain-of-thought reasoning | No |
+| `filesystem` | Filesystem operations | No |
+| `figma-dev-mode-mcp-server` | Figma Dev Mode integration | No (requires Figma app running) |
 
 ### First-Time Setup
 
@@ -136,7 +139,8 @@ This project uses **project-specific MCP servers** configured in `.mcp.json` (co
    ```json
    {
      "env": {
-       "GITHUB_TOKEN": "ghp_your_token_here"
+       "GITHUB_TOKEN": "ghp_your_token_here",
+       "CONTEXT7_API_KEY": "ctx7sk_your_key_here (optional)"
      }
    }
    ```

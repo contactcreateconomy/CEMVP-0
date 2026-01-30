@@ -19,16 +19,37 @@
       "description": "Convex database operations and queries"
     },
     "context7": {
-      "command": "npx",
-      "args": ["-y", "@context7/mcp-server"],
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "env": {
+        "CONTEXT7_API_KEY": "${CONTEXT7_API_KEY}"
+      },
       "description": "Live documentation lookup for libraries and frameworks"
+    },
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "description": "Chain-of-thought reasoning for complex problem solving"
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${PROJECT_DIR}"],
+      "description": "Filesystem operations for project directory"
+    },
+    "figma-dev-mode-mcp-server": {
+      "type": "http",
+      "url": "http://127.0.0.1:3845/mcp",
+      "description": "Figma Dev Mode integration (requires Figma Dev Mode to be running)"
     }
   },
   "_documentation": {
     "env_vars": {
-      "GITHUB_TOKEN": "Set in .claude/settings.local.json or system environment"
+      "GITHUB_TOKEN": "Set in .claude/settings.local.json or system environment",
+      "CONTEXT7_API_KEY": "Set in .claude/settings.local.json (optional - free tier works without)",
+      "PROJECT_DIR": "Automatically set to current project directory"
     },
     "adding_servers": "Add project-specific MCPs here, remove unused ones",
-    "context_warning": "Keep under 10 MCPs enabled to preserve context window"
+    "context_warning": "Keep under 10 MCPs enabled to preserve context window",
+    "figma_note": "Figma Dev Mode MCP requires the Figma Dev Mode app to be running on port 3845"
   }
 }

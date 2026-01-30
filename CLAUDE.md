@@ -75,7 +75,7 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 - **Skills**: convex-development, backend-patterns, frontend-patterns, security-review, tdd-workflow, react-best-practices
 - **Hooks**: Auto-format (Prettier), TypeScript check, console.log warnings, context compaction suggestions
 
-**MCP Servers**: `.mcp.json` (memory, github, convex, context7)
+**MCP Servers**: `.mcp.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, figma)
 
 **Project Commands** (auto-discovered from `.claude/commands/`):
 - `/convex-dev` - Convex backend development

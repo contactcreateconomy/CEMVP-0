@@ -9,7 +9,10 @@
     "memory",
     "github",
     "convex",
-    "context7"
+    "context7",
+    "sequential-thinking",
+    "filesystem",
+    "figma-dev-mode-mcp-server"
   ],
   "disabledMcpjsonServers": [],
   "permissions": {
