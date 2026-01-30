@@ -1,0 +1,6 @@
+# Admin Console Robots.txt
+# https://console.createconomy.com
+
+# Block all crawlers from admin console
+User-agent: *
+Disallow: /

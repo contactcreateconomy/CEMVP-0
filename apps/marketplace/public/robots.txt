@@ -1,0 +1,12 @@
+# Marketplace Robots.txt
+# https://createconomy.com
+
+User-agent: *
+Allow: /
+
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /admin/
+
+# Sitemap
+Sitemap: https://createconomy.com/sitemap.xml

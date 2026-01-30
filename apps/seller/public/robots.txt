@@ -1,0 +1,6 @@
+# Seller Portal Robots.txt
+# https://seller.createconomy.com
+
+# Block all crawlers from seller portal
+User-agent: *
+Disallow: /

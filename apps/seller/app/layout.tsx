@@ -3,8 +3,15 @@ import "./app.css";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
-  title: "Createconomy Seller Portal - Seller Dashboard",
-  description: "Seller dashboard for Createconomy",
+  title: {
+    default: "Createconomy Seller Portal",
+    template: "%s | Seller Portal",
+  },
+  description: "Manage your products, orders, and earnings",
+  robots: {
+    index: false,
+    follow: false,
+  },
 };
 
 export default function RootLayout({
@@ -13,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="min-h-screen font-sans antialiased">
         <Providers>{children}</Providers>
       </body>

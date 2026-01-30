@@ -5,6 +5,8 @@
   "packageManager": "pnpm@10.28.0",
   "scripts": {
     "dev": "turbo run dev",
+    "dev:low-memory": "cross-env NODE_OPTIONS=\"--max-old-space-size=2048\" turbo run dev",
+    "dev:sequential": "pnpm --filter @createconomy/marketplace dev & pnpm --filter @createconomy/forum dev & pnpm --filter @createconomy/admin dev & pnpm --filter @createconomy/seller dev",
     "build": "turbo run build",
     "test": "turbo run test",
     "lint": "turbo run lint",
@@ -23,6 +25,7 @@
     "@types/node": "^22.13.14",
     "autoprefixer": "^10.4.20",
     "convex": "^1.31.6",
+    "cross-env": "^7.0.3",
     "eslint": "^9.22.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-next": "^0.0.0",

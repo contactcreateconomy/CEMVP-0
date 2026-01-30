@@ -58,7 +58,15 @@
       "mcp__github__get_file_contents",
       "mcp__filesystem__read_multiple_files",
       "mcp__filesystem__read_text_file",
-      "Bash(done)"
+      "Bash(done)",
+      "mcp__convex__status",
+      "mcp__convex__envList",
+      "Bash(xargs cat:*)",
+      "mcp__filesystem__edit_file",
+      "Bash(set NODE_OPTIONS=--max-old-space-size=8192)",
+      "Bash(set NODE_OPTIONS=--max-old-space-size=4096)",
+      "Bash(timeout 30 cat:*)",
+      "Bash(powershell:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
@@ -101,7 +109,7 @@
         ]
       },
       {
-        "matcher": "tool == \"Edit\" || tool == \"Write\"",
+        "matcher": "tool == \"Edit\" || tool == \"Write\" || tool == \"Read\" || tool == \"Bash\" || tool == \"Grep\" || tool == \"Glob\"",
         "hooks": [
           {
             "type": "command",

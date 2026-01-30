@@ -1,0 +1,45 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+  "buildCommand": "pnpm turbo run build --filter=@createconomy/marketplace",
+  "devCommand": "pnpm turbo run dev --filter=@createconomy/marketplace -- --webpack",
+  "installCommand": "pnpm install",
+  "regions": ["iad1"],
+  "env": {
+    "NEXT_PUBLIC_CONVEX_URL": "@convex-url-marketplace",
+    "MARKETPLACE_URL": "@marketplace-url",
+    "FORUM_URL": "@forum-url",
+    "ADMIN_URL": "@admin-url",
+    "SELLER_URL": "@seller-url"
+  },
+  "build": {
+    "env": {
+      "NEXT_PUBLIC_CONVEX_URL": "@convex-url-marketplace"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
+}

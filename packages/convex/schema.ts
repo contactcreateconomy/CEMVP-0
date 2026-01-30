@@ -49,7 +49,19 @@ export const products = defineTable({
   tags: v.array(v.string()),
   stock: v.number(),
   status: v.string(), // "draft" | "active" | "archived"
-  metadata: v.optional(v.any()),
+  metadata: v.optional(
+    v.object({
+      seoTitle: v.optional(v.string()),
+      seoDescription: v.optional(v.string()),
+      features: v.optional(v.array(v.string())),
+      specifications: v.optional(
+        v.record(v.string())
+      ),
+      customFields: v.optional(
+        v.record(v.string())
+      ),
+    })
+  ),
   createdAt: v.number(),
   updatedAt: v.number(),
 })
