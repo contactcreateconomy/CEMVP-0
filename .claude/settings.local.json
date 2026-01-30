@@ -54,7 +54,11 @@
       "Bash(claude mcp show:*)",
       "Bash(claude mcp:*)",
       "Bash(ls:*)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "mcp__github__get_file_contents",
+      "mcp__filesystem__read_multiple_files",
+      "mcp__filesystem__read_text_file",
+      "Bash(done)"
     ]
   },
   "enableAllProjectMcpServers": true,

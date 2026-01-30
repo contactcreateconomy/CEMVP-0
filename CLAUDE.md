@@ -198,6 +198,28 @@ The following skills are available to assist with development in this project:
 - Stages appropriate files
 - Includes co-authorship attribution
 
+### `/react-best-practices` - React & Next.js Performance
+**Use when:** Writing, reviewing, or refactoring React/Next.js code
+- 57 performance rules across 8 categories
+- Bundle optimization, data fetching, component patterns
+
+### `/web-design-guidelines` - UI/UX & Accessibility
+**Use when:** Reviewing UI code for design compliance
+- 100+ web interface guidelines
+- Accessibility, UX patterns, design system checks
+
+### `/react-native-skills` - React Native Best Practices
+**Use when:** Building React Native or Expo mobile apps
+- 16 rules across performance, animations, UI patterns
+
+### `/composition-patterns` - React Component Composition
+**Use when:** Refactoring components with boolean prop proliferation
+- Compound components, render props, context providers
+
+### `/vercel-deploy` - Deploy to Vercel
+**Use when:** Deploying applications to Vercel
+- Auto-detects framework, returns preview URL
+
 ## Auto-Triggered Behaviors
 
 This project uses the **everything-claude-code** plugin (submodule at `.claude/everything-claude-code/`), which provides:
@@ -205,5 +227,7 @@ This project uses the **everything-claude-code** plugin (submodule at `.claude/e
 - **Hooks**: Auto-format TypeScript files after edits, warn about console.log statements, suggest context compaction
 - **Agents**: Code reviewer, build error resolver, security reviewer, TDD guide (trigger automatically on relevant conditions)
 - **Skills**: Backend patterns, frontend patterns, security review, coding standards (available via Skill tool)
+
+- **Skills**: Backend patterns, frontend patterns, security review, coding standards, React/Next.js best practices, web design guidelines, React Native, composition patterns, Vercel deployment (24 total skills available via Skill tool)
 
 All skills, hooks, and agents from the plugin are auto-discovered via `.claude/settings.json` - no manual registration needed.
