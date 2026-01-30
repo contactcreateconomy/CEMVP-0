@@ -11,11 +11,10 @@
     "convex",
     "context7",
     "sequential-thinking",
-    "filesystem"
+    "filesystem",
+    "shadcn"
   ],
-  "disabledMcpjsonServers": [
-    "figma-dev-mode-mcp-server"
-  ],
+  "disabledMcpjsonServers": [],
   "permissions": {
     "allow": [
       "Bash(pnpm run *)",

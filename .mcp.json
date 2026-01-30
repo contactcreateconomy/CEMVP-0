@@ -36,10 +36,10 @@
       "args": ["-y", "@modelcontextprotocol/server-filesystem", "${PROJECT_DIR}"],
       "description": "Filesystem operations for project directory"
     },
-    "figma-dev-mode-mcp-server": {
-      "type": "http",
-      "url": "http://127.0.0.1:3845/mcp",
-      "description": "Figma Dev Mode integration (requires Figma Dev Mode to be running)"
+    "shadcn": {
+      "command": "npx",
+      "args": ["-y", "shadcn@latest", "mcp"],
+      "description": "Shadcn UI component discovery and installation"
     }
   },
   "_documentation": {
@@ -49,7 +49,6 @@
       "PROJECT_DIR": "Automatically set to current project directory"
     },
     "adding_servers": "Add project-specific MCPs here, remove unused ones",
-    "context_warning": "Keep under 10 MCPs enabled to preserve context window",
-    "figma_note": "Figma Dev Mode MCP requires the Figma Dev Mode app to be running on port 3845"
+    "context_warning": "Keep under 10 MCPs enabled to preserve context window"
   }
 }

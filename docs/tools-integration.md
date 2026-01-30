@@ -126,6 +126,7 @@ This project uses **project-specific MCP servers** configured in `.mcp.json` (co
 | `context7` | Live documentation lookup | Optional (CONTEXT7_API_KEY) |
 | `sequential-thinking` | Chain-of-thought reasoning | No |
 | `filesystem` | Filesystem operations | No |
+| `shadcn` | Shadcn UI component discovery and installation | No |
 
 ### First-Time Setup
 

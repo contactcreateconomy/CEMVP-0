@@ -14,11 +14,10 @@
     "convex",
     "context7",
     "sequential-thinking",
-    "filesystem"
+    "filesystem",
+    "shadcn"
   ],
-  "disabledMcpjsonServers": [
-    "figma-dev-mode-mcp-server"
-  ],
+  "disabledMcpjsonServers": [],
   "env": {
     "_comment_env": "Add your personal API keys here - they are never committed to git",
     "GITHUB_TOKEN": "your-github-token-here",
