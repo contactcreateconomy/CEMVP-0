@@ -126,7 +126,6 @@ This project uses **project-specific MCP servers** configured in `.mcp.json` (co
 | `context7` | Live documentation lookup | Optional (CONTEXT7_API_KEY) |
 | `sequential-thinking` | Chain-of-thought reasoning | No |
 | `filesystem` | Filesystem operations | No |
-| `figma-dev-mode-mcp-server` | Figma Dev Mode integration | No (requires Figma app running) |
 
 ### First-Time Setup
 

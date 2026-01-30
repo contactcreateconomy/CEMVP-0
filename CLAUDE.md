@@ -87,7 +87,7 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 - `agents.md` - Agent usage guidelines
 - `hooks.md` - Hook configuration reference
 
-**MCP Servers**: `.mcp.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, figma)
+**MCP Servers**: `.mcp.json` (6 servers: memory, github, convex, context7, sequential-thinking, filesystem)
 
 ## Important Notes
 

@@ -1,0 +1,28 @@
+{
+  "_comment": [
+    "Copy this file to settings.local.json for your personal preferences",
+    "This file is git-ignored - your changes stay local",
+    "",
+    "SETUP INSTRUCTIONS:",
+    "1. Copy this file: cp .claude/settings.local.json.example .claude/settings.local.json",
+    "2. Add your API keys in the 'env' section below",
+    "3. Restart Claude Code to load your configuration"
+  ],
+  "enabledMcpjsonServers": [
+    "memory",
+    "github",
+    "convex",
+    "context7",
+    "sequential-thinking",
+    "filesystem"
+  ],
+  "disabledMcpjsonServers": [
+    "figma-dev-mode-mcp-server"
+  ],
+  "env": {
+    "_comment_env": "Add your personal API keys here - they are never committed to git",
+    "GITHUB_TOKEN": "your-github-token-here",
+    "CONTEXT7_API_KEY": "your-context7-key-here (optional - free tier works without)",
+    "CONVEX_DEPLOYMENT_URL": "your-convex-url-here (optional)"
+  }
+}

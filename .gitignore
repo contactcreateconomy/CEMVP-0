@@ -65,5 +65,5 @@ PLAN.md
 
 # Claude Code local configuration (sensitive data)
 .claude/settings.local.json
-.claude/*.local.*
 .claude/memory/
+!.claude/settings.local.json.example
