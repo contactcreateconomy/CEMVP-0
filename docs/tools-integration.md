@@ -183,16 +183,6 @@ Keep under 10 MCPs enabled to preserve context window. Disable unused MCPs in `.
 }
 ```
 
-## Project Commands
-
-Project-specific commands are auto-discovered from `.claude/commands/`:
-
-| Command | Purpose |
-|---------|---------|
-| `/convex-dev` | Convex backend development workflows |
-| `/multi-tenant` | Multi-tenant architecture guidance |
-| `/deploy-all` | Deploy all 4 apps to production |
-
 ## Permissions
 
 Project-specific permissions are defined in `.claude/settings.json`:
@@ -277,7 +267,6 @@ This repository is configured for **fully portable, team-friendly Claude Code se
 |------|---------|-------------------|
 | `.mcp.json` | MCP server definitions | Yes |
 | `.claude/settings.json` | Plugins, permissions, MCP controls | Yes |
-| `.claude/commands/` | Project-specific commands | Yes |
 | `.claude/settings.local.json` | Personal API keys and preferences | No (git-ignored) |
 | `.claude/settings.local.json.example` | Template for new team members | Yes |
 
