@@ -74,6 +74,18 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 - **Agents**: architect, build-error-resolver, code-reviewer, security-reviewer, tdd-guide, planner, refactor-cleaner, doc-updater, e2e-runner
 - **Skills**: convex-development, backend-patterns, frontend-patterns, security-review, tdd-workflow, react-best-practices
 - **Hooks**: Auto-format (Prettier), TypeScript check, console.log warnings, context compaction suggestions
+- **Commands**: /plan, /tdd, /e2e, /commit, /code-review, /build-fix, /verify, /refactor-clean
+- **Rules**: coding-style, security, performance, testing, git-workflow (see below)
+
+**Rules** (located in `.claude/everything-claude-code/rules/`):
+- `coding-style.md` - Immutability, file organization, naming conventions
+- `security.md` - Security best practices and patterns
+- `performance.md` - Performance optimization guidelines
+- `testing.md` - Testing strategies and coverage
+- `git-workflow.md` - Git commit and branch conventions
+- `patterns.md` - Architectural patterns to follow
+- `agents.md` - Agent usage guidelines
+- `hooks.md` - Hook configuration reference
 
 **MCP Servers**: `.mcp.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, figma)
 
