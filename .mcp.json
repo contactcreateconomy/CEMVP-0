@@ -1,11 +1,34 @@
 {
   "mcpServers": {
-    "shadcn": {
+    "memory": {
       "command": "npx",
-      "args": [
-        "shadcn@latest",
-        "mcp"
-      ]
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "description": "Project-specific memory for Createconomy knowledge graph"
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "description": "GitHub operations for Createconomy repository"
+    },
+    "convex": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-convex"],
+      "description": "Convex database operations and queries"
+    },
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@context7/mcp-server"],
+      "description": "Live documentation lookup for libraries and frameworks"
     }
+  },
+  "_documentation": {
+    "env_vars": {
+      "GITHUB_TOKEN": "Set in .claude/settings.local.json or system environment"
+    },
+    "adding_servers": "Add project-specific MCPs here, remove unused ones",
+    "context_warning": "Keep under 10 MCPs enabled to preserve context window"
   }
 }
