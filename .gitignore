@@ -62,3 +62,8 @@ bundle-analysis/
 
 # Plan files
 PLAN.md
+
+# Claude Code local configuration (sensitive data)
+.claude/settings.local.json
+.claude/*.local.*
+.claude/memory/
