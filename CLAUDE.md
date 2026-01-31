@@ -91,12 +91,29 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 | `vercel-deploy-claimable` | Deploy to Vercel with claimable URLs - auto-detects 40+ frameworks from package.json |
 | `web-design-guidelines` | Web interface guidelines - 100+ rules covering accessibility, focus states, forms, animation, typography, performance |
 
+**Convex Skills** (@waynesutton/convex-skills):
+| Skill | Purpose |
+|-------|---------|
+| `convex` | General Convex development guidance |
+| `convex-best-practices` | Production-ready Convex apps - function organization, query patterns, validation, TypeScript, error handling |
+| `convex-functions` | Writing queries, mutations, actions, and HTTP actions |
+| `convex-realtime` | Reactive applications with live updates |
+| `convex-schema-validator` | Database schema definition and validation |
+| `convex-file-storage` | File upload, storage, and serving |
+| `convex-agents` | Building AI agents with Convex |
+| `convex-cron-jobs` | Scheduled functions and background tasks |
+| `convex-http-actions` | HTTP endpoints and webhook handling |
+| `convex-migrations` | Schema evolution and data migrations |
+| `convex-security-check` | Quick security audit checklist |
+| `convex-security-audit` | Deep security review patterns |
+| `convex-component-authoring` | Creating reusable Convex components |
+
 **Createconomy Project Skills:**
 | Skill | Purpose |
 |-------|---------|
-| `convex-best-practices` | Convex backend patterns - multi-tenancy design, schema conventions, function development, tenant ownership verification |
 | `monorepo-workflow` | Turborepo patterns - shared packages, cross-package development, workspace conventions, CI/CD pipeline |
 | `shadcn-best-practices` | Shadcn UI patterns - component composition, theming, accessibility, form patterns with react-hook-form & Zod |
+| `avoid-feature-creep` | Prevent scope creep during development |
 
 ## Important Notes
 

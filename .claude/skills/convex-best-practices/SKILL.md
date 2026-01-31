@@ -1,263 +1,334 @@
-# Convex Best Practices for Createconomy
+---
+name: convex-best-practices
+displayName: Convex Best Practices
+description: Guidelines for building production-ready Convex apps covering function organization, query patterns, validation, TypeScript usage, error handling, and the Zen of Convex design philosophy
+version: 1.0.0
+author: Convex
+tags: [convex, best-practices, typescript, production, error-handling]
+---
 
-Project-specific Convex patterns, multi-tenancy design, schema conventions, and function development guidelines.
+# Convex Best Practices
 
-## Multi-Tenancy Architecture
+Build production-ready Convex applications by following established patterns for function organization, query optimization, validation, TypeScript usage, and error handling.
 
-### Tenant Detection
+## Documentation Sources
 
-**All apps use hostname-based tenant detection** via `getTenantFromHostname()` in `packages/utils/src/tenant.ts`:
+Before implementing, do not assume; fetch the latest documentation:
 
-| Hostname | Domain | App |
-|----------|--------|-----|
-| `createconomy.com` | `marketplace` | apps/marketplace |
-| `discuss.createconomy.com` | `forum` | apps/forum |
-| `console.createconomy.com` | `admin` | apps/admin |
-| `seller.createconomy.com` | `seller` | apps/seller |
+- Primary: https://docs.convex.dev/understanding/best-practices/
+- Error Handling: https://docs.convex.dev/functions/error-handling
+- Write Conflicts: https://docs.convex.dev/error#1
+- For broader context: https://docs.convex.dev/llms.txt
 
-### Data Segregation Rules
+## Instructions
 
-**CRITICAL**: All user data MUST be segregated by `tenantId`. Never return data across tenants.
+### The Zen of Convex
 
-```tsx
-// ✅ GOOD: Always filter by tenantId
-const products = useQuery(api.products.getProducts, { tenantId: currentTenant.id });
+1. **Convex manages the hard parts** - Let Convex handle caching, real-time sync, and consistency
+2. **Functions are the API** - Design your functions as your application's interface
+3. **Schema is truth** - Define your data model explicitly in schema.ts
+4. **TypeScript everywhere** - Leverage end-to-end type safety
+5. **Queries are reactive** - Think in terms of subscriptions, not requests
 
-// ❌ BAD: Returns data from ALL tenants
-const products = useQuery(api.products.getProducts);
-```
+### Function Organization
 
-### Tenant Context
-
-Each request should resolve tenant context before any data access:
-
-```tsx
-// Server Component pattern
-import { fetchQuery } from "convex/nextjs";
-import { getTenantFromHostname } from "@createconomy/utils/tenant";
-import { api } from "@createconomy/convex/server";
-
-export default async function Page() {
-  const domain = getTenantFromHostname(headers().get("host") ?? "");
-  const tenant = await fetchQuery(api.tenants.getTenantByDomain, { domain });
-
-  if (!tenant) return notFound();
-
-  const products = await fetchQuery(api.products.getProducts, {
-    tenantId: tenant._id,
-  });
-  // ...
-}
-```
-
-## Schema Design Patterns
-
-### Standard Field Patterns
-
-All tables follow these conventions:
+Organize your Convex functions by domain:
 
 ```typescript
-// Standard timestamp pattern
-export const exampleTable = defineTable({
-  // ... fields
-  createdAt: v.number(), // Unix timestamp in ms
-  updatedAt: v.number(), // Unix timestamp in ms
-})
-  .index("by_tenant", ["tenantId"]); // Always index tenantId
+// convex/users.ts - User-related functions
+import { query, mutation } from "./_generated/server";
+import { v } from "convex/values";
+
+export const get = query({
+  args: { userId: v.id("users") },
+  returns: v.union(v.object({
+    _id: v.id("users"),
+    _creationTime: v.number(),
+    name: v.string(),
+    email: v.string(),
+  }), v.null()),
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.userId);
+  },
+});
 ```
 
-### Index Strategy
+### Argument and Return Validation
 
-| Index Pattern | When to Use |
-|---------------|-------------|
-| `by_tenant` | ALL tables - for data isolation |
-| `by_email` | User lookups |
-| `by_slug` | SEO-friendly URLs |
-| `by_status` | Filtering by workflow state |
-| `by_<foreign>` | Foreign key relationships |
+Always define validators for arguments AND return types:
 
-### Schema File Organization
-
-- **Location**: `packages/convex/schema.ts`
-- **8 Tables**: users, tenants, products, orders, forumPosts, forumComments, stripePrices, sessions
-- **Generated types**: `packages/convex/convex/_generated/` MUST be committed to git
-
-## Function Conventions
+```typescript
+export const createTask = mutation({
+  args: {
+    title: v.string(),
+    description: v.optional(v.string()),
+    priority: v.union(v.literal("low"), v.literal("medium"), v.literal("high")),
+  },
+  returns: v.id("tasks"),
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("tasks", {
+      title: args.title,
+      description: args.description,
+      priority: args.priority,
+      completed: false,
+      createdAt: Date.now(),
+    });
+  },
+});
+```
 
 ### Query Patterns
 
-**Always accept tenantId as a parameter**:
+Use indexes instead of filters for efficient queries:
 
 ```typescript
-// packages/convex/convex/products.ts
-import { query } from "./_generated/server";
-import { v } from "convex/values";
+// Schema with index
+export default defineSchema({
+  tasks: defineTable({
+    userId: v.id("users"),
+    status: v.string(),
+    createdAt: v.number(),
+  })
+    .index("by_user", ["userId"])
+    .index("by_user_and_status", ["userId", "status"]),
+});
 
-export const getProducts = query({
-  args: {
-    tenantId: v.id("tenants"),
-    status: v.optional(v.string()),
-    limit: v.optional(v.number()),
-  },
+// Query using index
+export const getTasksByUser = query({
+  args: { userId: v.id("users") },
+  returns: v.array(v.object({
+    _id: v.id("tasks"),
+    _creationTime: v.number(),
+    userId: v.id("users"),
+    status: v.string(),
+    createdAt: v.number(),
+  })),
   handler: async (ctx, args) => {
-    // Always filter by tenantId first
-    const products = await ctx.db
-      .query("products")
-      .withIndex("by_tenant", (q) => q.eq("tenantId", args.tenantId))
-      .filter((q) =>
-        args.status ? q.eq(q.field("status"), args.status) : q
-      )
-      .take(args.limit ?? 50);
-
-    return products;
+    return await ctx.db
+      .query("tasks")
+      .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .order("desc")
+      .collect();
   },
 });
 ```
 
-### Mutation Patterns
+### Error Handling
 
-**Verify tenant ownership before mutations**:
+Use ConvexError for user-facing errors:
 
 ```typescript
-export const updateProduct = mutation({
-  args: {
-    productId: v.id("products"),
-    tenantId: v.id("tenants"), // For ownership verification
-    ...updateFields,
-  },
-  handler: async (ctx, args) => {
-    const product = await ctx.db.get(args.productId);
+import { ConvexError } from "convex/values";
 
-    // Security: Verify tenant ownership
-    if (!product || product.tenantId !== args.tenantId) {
-      throw new Error("Product not found or access denied");
+export const updateTask = mutation({
+  args: {
+    taskId: v.id("tasks"),
+    title: v.string(),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const task = await ctx.db.get(args.taskId);
+    
+    if (!task) {
+      throw new ConvexError({
+        code: "NOT_FOUND",
+        message: "Task not found",
+      });
     }
-
-    // Update allowed
-    await ctx.db.patch(args.productId, { ...updateFields });
+    
+    await ctx.db.patch(args.taskId, { title: args.title });
+    return null;
   },
 });
 ```
 
-### Naming Conventions
+### Avoiding Write Conflicts (Optimistic Concurrency Control)
 
-| Function Type | Pattern | Example |
-|---------------|---------|---------|
-| List items | `get<Plural>` | `getProducts`, `getUsers` |
-| Single item | `<Resource>ById` | `getProductById`, `getUserById` |
-| By unique field | `<Resource>By<Field>` | `getUserByEmail`, `getTenantBySlug` |
-| Create | `create<Resource>` | `createProduct`, `createUser` |
-| Update | `update<Resource>` | `updateProduct`, `updateUser` |
-| Delete | `delete<Resource>` | `deleteProduct`, `deleteUser` |
-| Toggle state | `toggle<Property>` | `togglePostLike`, `toggleCommentLike` |
-| Increment | `increment<Property>` | `incrementPostViews` |
+Convex uses OCC. Follow these patterns to minimize conflicts:
 
-## File Organization
+```typescript
+// GOOD: Make mutations idempotent
+export const completeTask = mutation({
+  args: { taskId: v.id("tasks") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const task = await ctx.db.get(args.taskId);
+    
+    // Early return if already complete (idempotent)
+    if (!task || task.status === "completed") {
+      return null;
+    }
+    
+    await ctx.db.patch(args.taskId, {
+      status: "completed",
+      completedAt: Date.now(),
+    });
+    return null;
+  },
+});
 
-### Convex Package Structure
+// GOOD: Patch directly without reading first when possible
+export const updateNote = mutation({
+  args: { id: v.id("notes"), content: v.string() },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    // Patch directly - ctx.db.patch throws if document doesn't exist
+    await ctx.db.patch(args.id, { content: args.content });
+    return null;
+  },
+});
 
-```
-packages/convex/
-├── schema.ts           # Database schema (8 tables)
-├── server.ts           # Function exports
-├── client.ts           # React client utilities
-├── convex.config.ts    # Convex configuration
-└── convex/
-    ├── _generated/     # Auto-generated types (COMMIT TO GIT)
-    ├── users.ts        # User functions
-    ├── tenants.ts      # Tenant functions
-    ├── products.ts     # Product functions
-    ├── orders.ts       # Order functions
-    ├── forumPosts.ts   # Forum post functions
-    ├── forumComments.ts # Comment functions
-    └── admin.ts        # Admin/stats functions
-```
-
-## Development Workflow
-
-### Commands
-
-| Command | Purpose |
-|---------|---------|
-| `pnpm convex:dev` | Start Convex dev server (separate terminal) |
-| `pnpm convex:deploy` | Deploy schema and functions to production |
-| `pnpm convex:typecheck` | Verify Convex types are valid |
-
-### Schema Changes
-
-1. Edit `packages/convex/schema.ts`
-2. Dev server auto-regenerates types
-3. Run `pnpm convex:typecheck` to verify
-4. Commit `convex/_generated/` to git
-
-### Adding Functions
-
-1. Create/edit file in `packages/convex/convex/`
-2. Export from `server.ts`
-3. Functions auto-reload in dev
-4. Test before deploying
-
-## Usage Patterns
-
-### Client-Side (React Components)
-
-```tsx
-import { useQuery, useMutation } from "convex/react";
-import { api } from "@createconomy/convex/server";
-
-function ProductList() {
-  const products = useQuery(api.products.getProducts, {
-    tenantId: currentTenant.id,
-    status: "active"
-  });
-  const createProduct = useMutation(api.products.createProduct);
-
-  if (!products) return <div>Loading...</div>;
-  return <div>{/* render products */}</div>;
-}
+// GOOD: Use Promise.all for parallel independent updates
+export const reorderItems = mutation({
+  args: { itemIds: v.array(v.id("items")) },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const updates = args.itemIds.map((id, index) =>
+      ctx.db.patch(id, { order: index })
+    );
+    await Promise.all(updates);
+    return null;
+  },
+});
 ```
 
-### Server-Side (Server Components)
+### TypeScript Best Practices
 
-```tsx
-import { fetchQuery } from "convex/nextjs";
-import { api } from "@createconomy/convex/server";
+```typescript
+import { Id, Doc } from "./_generated/dataModel";
 
-export default async function Page() {
-  const products = await fetchQuery(api.products.getProducts, {
-    tenantId: tenant._id,
-    status: "active"
-  });
-  return <div>{/* render products */}</div>;
-}
+// Use Id type for document references
+type UserId = Id<"users">;
+
+// Use Doc type for full documents
+type User = Doc<"users">;
+
+// Define Record types properly
+const userScores: Record<Id<"users">, number> = {};
 ```
 
-## Best Practices Summary
+### Internal vs Public Functions
 
-### Security
+```typescript
+// Public function - exposed to clients
+export const getUser = query({
+  args: { userId: v.id("users") },
+  returns: v.union(v.null(), v.object({ /* ... */ })),
+  handler: async (ctx, args) => {
+    // ...
+  },
+});
 
-- Never expose `CONVEX_ADMIN_KEY` to client code
-- Validate all inputs in mutations using `v.<type>()`
-- Verify `tenantId` ownership before allowing mutations
-- Use Convex auth for user authentication
+// Internal function - only callable from other Convex functions
+export const _updateUserStats = internalMutation({
+  args: { userId: v.id("users") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    // ...
+  },
+});
+```
 
-### Performance
+## Examples
 
-- Use indexes for frequently queried fields
-- Paginate large result sets with `limit` parameter
-- Prefer `fetchQuery` in Server Components when possible
-- Avoid N+1 queries by batching relationship lookups
+### Complete CRUD Pattern
 
-### Testing
+```typescript
+// convex/tasks.ts
+import { query, mutation } from "./_generated/server";
+import { v } from "convex/values";
+import { ConvexError } from "convex/values";
 
-- Test functions in dev before deploying to production
-- Use the Convex dashboard to inspect data and run functions
-- Verify tenant isolation in all queries/mutations
+const taskValidator = v.object({
+  _id: v.id("tasks"),
+  _creationTime: v.number(),
+  title: v.string(),
+  completed: v.boolean(),
+  userId: v.id("users"),
+});
 
-## Resources
+export const list = query({
+  args: { userId: v.id("users") },
+  returns: v.array(taskValidator),
+  handler: async (ctx, args) => {
+    return await ctx.db
+      .query("tasks")
+      .withIndex("by_user", (q) => q.eq("userId", args.userId))
+      .collect();
+  },
+});
 
-- **Docs**: `docs/convex-backend.md`
-- **Schema**: `packages/convex/schema.ts`
-- **Functions**: `packages/convex/README.md`
-- **Tenant utils**: `packages/utils/src/tenant.ts`
-- **Official**: https://docs.convex.dev
+export const create = mutation({
+  args: {
+    title: v.string(),
+    userId: v.id("users"),
+  },
+  returns: v.id("tasks"),
+  handler: async (ctx, args) => {
+    return await ctx.db.insert("tasks", {
+      title: args.title,
+      completed: false,
+      userId: args.userId,
+    });
+  },
+});
+
+export const update = mutation({
+  args: {
+    taskId: v.id("tasks"),
+    title: v.optional(v.string()),
+    completed: v.optional(v.boolean()),
+  },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    const { taskId, ...updates } = args;
+    
+    // Remove undefined values
+    const cleanUpdates = Object.fromEntries(
+      Object.entries(updates).filter(([_, v]) => v !== undefined)
+    );
+    
+    if (Object.keys(cleanUpdates).length > 0) {
+      await ctx.db.patch(taskId, cleanUpdates);
+    }
+    return null;
+  },
+});
+
+export const remove = mutation({
+  args: { taskId: v.id("tasks") },
+  returns: v.null(),
+  handler: async (ctx, args) => {
+    await ctx.db.delete(args.taskId);
+    return null;
+  },
+});
+```
+
+## Best Practices
+
+- Never run `npx convex deploy` unless explicitly instructed
+- Never run any git commands unless explicitly instructed
+- Always define return validators for functions
+- Use indexes for all queries that filter data
+- Make mutations idempotent to handle retries gracefully
+- Use ConvexError for user-facing error messages
+- Organize functions by domain (users.ts, tasks.ts, etc.)
+- Use internal functions for sensitive operations
+- Leverage TypeScript's Id and Doc types
+
+## Common Pitfalls
+
+1. **Using filter instead of withIndex** - Always define indexes and use withIndex
+2. **Missing return validators** - Always specify the returns field
+3. **Non-idempotent mutations** - Check current state before updating
+4. **Reading before patching unnecessarily** - Patch directly when possible
+5. **Not handling null returns** - Document IDs might not exist
+
+## References
+
+- Convex Documentation: https://docs.convex.dev/
+- Convex LLMs.txt: https://docs.convex.dev/llms.txt
+- Best Practices: https://docs.convex.dev/understanding/best-practices/
+- Error Handling: https://docs.convex.dev/functions/error-handling
+- Write Conflicts: https://docs.convex.dev/error#1
