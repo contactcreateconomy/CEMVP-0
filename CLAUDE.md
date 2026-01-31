@@ -73,12 +73,13 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 | Server | Purpose |
 |--------|---------|
 | `convex` | Database operations, schema queries |
+| `context7` | Live documentation lookup (requires CONTEXT7_API_KEY) |
+| `figma-dev-mode-mcp-server` | Figma Dev Mode integration (requires Figma plugin) |
+| `filesystem` | File operations |
 | `github` | PRs, issues, repo operations (requires GITHUB_TOKEN) |
 | `memory` | Project knowledge graph |
-| `context7` | Live documentation lookup (requires CONTEXT7_API_KEY) |
-| `shadcn` | UI component discovery and installation |
-| `filesystem` | File operations |
 | `sequential-thinking` | Chain-of-thought reasoning |
+| `shadcn` | UI component discovery and installation |
 
 **Installed Skills** (`.claude/skills/`):
 

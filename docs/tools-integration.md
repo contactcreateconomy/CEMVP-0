@@ -33,12 +33,13 @@ This project uses **project-specific MCP servers** configured in `~/.claude.json
 **Enabled MCPs:**
 | MCP Server | Purpose | API Key Required |
 |------------|---------|------------------|
-| `memory` | Project-specific knowledge graph | No |
-| `github` | GitHub operations (PRs, issues, repos) | Yes (GITHUB_TOKEN) |
-| `convex` | Convex database operations | No |
 | `context7` | Live documentation lookup | Optional (CONTEXT7_API_KEY) |
-| `sequential-thinking` | Chain-of-thought reasoning | No |
+| `convex` | Convex database operations | No |
+| `figma-dev-mode-mcp-server` | Figma Dev Mode integration (requires Figma plugin) | No |
 | `filesystem` | Filesystem operations | No |
+| `github` | GitHub operations (PRs, issues, repos) | Yes (GITHUB_TOKEN) |
+| `memory` | Project-specific knowledge graph | No |
+| `sequential-thinking` | Chain-of-thought reasoning | No |
 | `shadcn` | Shadcn UI component discovery and installation | No |
 
 ### Global MCP Servers
