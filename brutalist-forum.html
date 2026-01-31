@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATECONOMY // FORUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f5;
+      --bg-accent: #ff3300;
+      --border: #000000;
+      --text-primary: #000000;
+      --text-secondary: #333333;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-body: 'Space Mono', monospace;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg-primary);
+      border-bottom: 3px solid var(--border);
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .navbar-logo {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .navbar-logo span {
+      color: var(--bg-accent);
+    }
+
+    .navbar-search {
+      flex: 1;
+      max-width: 400px;
+      margin: 0 40px;
+    }
+
+    .navbar-search input {
+      width: 100%;
+      padding: 12px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      border: 3px solid var(--border);
+      background: var(--bg-secondary);
+      outline: none;
+    }
+
+    .navbar-search input:focus {
+      background: var(--bg-primary);
+      border-color: var(--bg-accent);
+    }
+
+    .navbar-user {
+      width: 48px;
+      height: 48px;
+      border: 3px solid var(--border);
+      background: var(--bg-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: white;
+    }
+
+    /* MAIN LAYOUT */
+    .container {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 280px 1fr 320px;
+      gap: 24px;
+    }
+
+    /* LEFT SIDEBAR */
+    .sidebar-left {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 16px 24px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: var(--bg-accent);
+      color: white;
+      border: 3px solid var(--border);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .btn-primary:hover {
+      background: #cc2900;
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--border);
+    }
+
+    .categories {
+      margin-top: 24px;
+      border: 3px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .categories-header {
+      padding: 16px;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 3px solid var(--border);
+      background: var(--bg-primary);
+    }
+
+    .category-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+
+    .category-item:last-child {
+      border-bottom: none;
+    }
+
+    .category-item:hover {
+      background: var(--bg-primary);
+    }
+
+    .category-name {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .category-count {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 700;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      padding: 4px 12px;
+    }
+
+    .my-activity {
+      margin-top: 24px;
+      display: block;
+      padding: 16px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      border: 3px solid var(--border);
+      background: var(--bg-primary);
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .my-activity:hover {
+      background: var(--bg-accent);
+      color: white;
+      border-color: var(--bg-accent);
+    }
+
+    /* CENTER FEED */
+    .feed {
+      min-width: 0;
+    }
+
+    .sort-tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 24px;
+      border: 3px solid var(--border);
+    }
+
+    .sort-tab {
+      flex: 1;
+      padding: 16px;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: var(--bg-secondary);
+      border: none;
+      border-right: 3px solid var(--border);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .sort-tab:last-child {
+      border-right: none;
+    }
+
+    .sort-tab:hover {
+      background: var(--bg-primary);
+    }
+
+    .sort-tab.active {
+      background: var(--text-primary);
+      color: white;
+    }
+
+    .post-card {
+      border: 3px solid var(--border);
+      background: var(--bg-primary);
+      margin-bottom: 16px;
+      transition: all 0.1s;
+    }
+
+    .post-card:hover {
+      border-color: var(--bg-accent);
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--border);
+    }
+
+    .post-card-header {
+      padding: 20px 24px;
+      border-bottom: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .post-category {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+    }
+
+    .post-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--text-primary);
+      flex: 1;
+    }
+
+    .post-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .post-title a:hover {
+      color: var(--bg-accent);
+    }
+
+    .post-meta {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .post-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .post-avatar {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 12px;
+      background: var(--bg-secondary);
+    }
+
+    .post-username {
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .post-summary {
+      padding: 20px 24px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border);
+    }
+
+    .post-actions {
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .post-votes {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--font-body);
+      font-weight: 700;
+    }
+
+    .vote-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .vote-btn:hover {
+      background: var(--bg-accent);
+      color: white;
+      border-color: var(--bg-accent);
+    }
+
+    .vote-count {
+      font-size: 18px;
+    }
+
+    .post-stats {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .post-stat {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .post-stat svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .pagination {
+      margin-top: 32px;
+      display: flex;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .page-btn {
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 16px;
+      border: 3px solid var(--border);
+      background: var(--bg-primary);
+      cursor: pointer;
+      transition: all 0.1s;
+    }
+
+    .page-btn:hover {
+      background: var(--bg-secondary);
+    }
+
+    .page-btn.active {
+      background: var(--text-primary);
+      color: white;
+    }
+
+    /* RIGHT SIDEBAR */
+    .sidebar-right {
+      position: sticky;
+      top: 100px;
+      height: fit-content;
+    }
+
+    .widget {
+      border: 3px solid var(--border);
+      background: var(--bg-secondary);
+      margin-bottom: 24px;
+    }
+
+    .widget-header {
+      padding: 16px;
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      border-bottom: 3px solid var(--border);
+      background: var(--bg-primary);
+    }
+
+    .campaign-widget {
+      background: var(--bg-accent);
+      color: white;
+      border-color: var(--bg-accent);
+    }
+
+    .campaign-widget .widget-header {
+      background: #cc2900;
+      border-color: var(--border);
+      color: white;
+    }
+
+    .campaign-content {
+      padding: 24px;
+      font-family: var(--font-display);
+    }
+
+    .campaign-title {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+
+    .campaign-desc {
+      font-family: var(--font-body);
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    .leaderboard-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      border-bottom: 1px solid var(--border);
+      font-family: var(--font-body);
+    }
+
+    .leaderboard-item:last-child {
+      border-bottom: none;
+    }
+
+    .leaderboard-rank {
+      font-weight: 700;
+      font-size: 16px;
+      width: 32px;
+    }
+
+    .leaderboard-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .leaderboard-points {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      padding: 16px;
+      gap: 16px;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 16px;
+      background: var(--bg-primary);
+      border: 2px solid var(--border);
+    }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1200px) {
+      .container {
+        grid-template-columns: 260px 1fr;
+      }
+
+      .sidebar-right {
+        display: none;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 12px 16px;
+      }
+
+      .navbar-search {
+        display: none;
+      }
+
+      .container {
+        grid-template-columns: 1fr;
+        padding: 16px;
+      }
+
+      .sidebar-left {
+        display: none;
+      }
+
+      .post-title {
+        font-size: 18px;
+      }
+    }
+
+    /* ANIMATIONS */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .post-card {
+      animation: slideIn 0.3s ease-out backwards;
+    }
+
+    .post-card:nth-child(1) { animation-delay: 0.05s; }
+    .post-card:nth-child(2) { animation-delay: 0.1s; }
+    .post-card:nth-child(3) { animation-delay: 0.15s; }
+    .post-card:nth-child(4) { animation-delay: 0.2s; }
+    .post-card:nth-child(5) { animation-delay: 0.25s; }
+  </style>
+</head>
+<body>
+  <!-- NAVIGATION -->
+  <nav class="navbar">
+    <div class="navbar-logo">CREATECONOMY <span>//</span> FORUM</div>
+    <div class="navbar-search">
+      <input type="text" placeholder="SEARCH DISCUSSIONS...">
+    </div>
+    <div class="navbar-user">SC</div>
+  </nav>
+
+  <!-- MAIN CONTAINER -->
+  <div class="container">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left">
+      <button class="btn-primary">+ NEW DISCUSSION</button>
+
+      <div class="categories">
+        <div class="categories-header">CATEGORIES</div>
+
+        <div class="category-item">
+          <div class="category-name">💡 General</div>
+          <div class="category-count">1247</div>
+        </div>
+
+        <div class="category-item">
+          <div class="category-name">💼 Startups</div>
+          <div class="category-count">856</div>
+        </div>
+
+        <div class="category-item">
+          <div class="category-name">🎨 Design</div>
+          <div class="category-count">432</div>
+        </div>
+
+        <div class="category-item">
+          <div class="category-name">💻 Dev</div>
+          <div class="category-count">678</div>
+        </div>
+
+        <div class="category-item">
+          <div class="category-name">📈 Marketing</div>
+          <div class="category-count">234</div>
+        </div>
+
+        <div class="category-item">
+          <div class="category-name">🚀 Growth</div>
+          <div class="category-count">89</div>
+        </div>
+      </div>
+
+      <a class="my-activity">MY ACTIVITY</a>
+    </aside>
+
+    <!-- CENTER FEED -->
+    <main class="feed">
+      <div class="sort-tabs">
+        <button class="sort-tab active">HOT</button>
+        <button class="sort-tab">NEW</button>
+        <button class="sort-tab">TOP</button>
+      </div>
+
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-category">💡 GENERAL</span>
+          <h2 class="post-title">
+            <a href="#">Building scalable multi-tenant applications with Next.js and Convex</a>
+          </h2>
+        </div>
+
+        <div class="post-meta">
+          <div class="post-author">
+            <div class="post-avatar">SC</div>
+            <span class="post-username">@sarah_chen</span>
+          </div>
+          <span>·</span>
+          <span>2 hours ago</span>
+        </div>
+
+        <p class="post-summary">
+          Explore strategies for implementing tenant isolation at the database level while maintaining code reuse across multiple applications. We'll dive deep into Convex's tenant patterns...
+        </p>
+
+        <div class="post-actions">
+          <div class="post-votes">
+            <button class="vote-btn">▲</button>
+            <span class="vote-count">142</span>
+            <button class="vote-btn">▼</button>
+          </div>
+          <div class="post-stats">
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              34
+            </span>
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-category">💻 DEV</span>
+          <h2 class="post-title">
+            <a href="#">How we achieved 99.9% uptime with edge functions</a>
+          </h2>
+        </div>
+
+        <div class="post-meta">
+          <div class="post-author">
+            <div class="post-avatar">JK</div>
+            <span class="post-username">@jordan_kim</span>
+          </div>
+          <span>·</span>
+          <span>4 hours ago</span>
+        </div>
+
+        <p class="post-summary">
+          A deep dive into our edge deployment strategy, including load balancing patterns, failover mechanisms, and how we handle regional traffic distribution...
+        </p>
+
+        <div class="post-actions">
+          <div class="post-votes">
+            <button class="vote-btn">▲</button>
+            <span class="vote-count">89</span>
+            <button class="vote-btn">▼</button>
+          </div>
+          <div class="post-stats">
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              22
+            </span>
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <article class="post-card">
+        <div class="post-card-header">
+          <span class="post-category">🎨 DESIGN</span>
+          <h2 class="post-title">
+            <a href="#">Design systems for technical products: Lessons learned</a>
+          </h2>
+        </div>
+
+        <div class="post-meta">
+          <div class="post-author">
+            <div class="post-avatar">AR</div>
+            <span class="post-username">@alex_rivera</span>
+          </div>
+          <span>·</span>
+          <span>6 hours ago</span>
+        </div>
+
+        <p class="post-summary">
+          Building a design system that resonates with developers requires different priorities than consumer-facing products. Here's what we discovered about component architecture...
+        </p>
+
+        <div class="post-actions">
+          <div class="post-votes">
+            <button class="vote-btn">▲</button>
+            <span class="vote-count">67</span>
+            <button class="vote-btn">▼</button>
+          </div>
+          <div class="post-stats">
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+              18
+            </span>
+            <span class="post-stat">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+          </div>
+        </div>
+      </article>
+
+      <div class="pagination">
+        <button class="page-btn">←</button>
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn">…</button>
+        <button class="page-btn">12</button>
+        <button class="page-btn">→</button>
+      </div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar-right">
+      <div class="widget campaign-widget">
+        <div class="widget-header">🏆 ACTIVE CAMPAIGN</div>
+        <div class="campaign-content">
+          <div class="campaign-title">$ WIN-PRO</div>
+          <div class="campaign-desc">Top contributor this week gets Claude Pro</div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="widget-header">TOP CONTRIBUTORS</div>
+
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">01</div>
+          <div class="leaderboard-user">
+            <div class="post-avatar" style="background: var(--bg-accent); color: white;">SC</div>
+            <span class="post-username">@sarah_chen</span>
+          </div>
+          <div class="leaderboard-points">4,520</div>
+        </div>
+
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">02</div>
+          <div class="leaderboard-user">
+            <div class="post-avatar">JK</div>
+            <span class="post-username">@jordan_kim</span>
+          </div>
+          <div class="leaderboard-points">3,890</div>
+        </div>
+
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">03</div>
+          <div class="leaderboard-user">
+            <div class="post-avatar">AR</div>
+            <span class="post-username">@alex_rivera</span>
+          </div>
+          <div class="leaderboard-points">3,245</div>
+        </div>
+
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">04</div>
+          <div class="leaderboard-user">
+            <div class="post-avatar">TP</div>
+            <span class="post-username">@taylor_park</span>
+          </div>
+          <div class="leaderboard-points">2,890</div>
+        </div>
+
+        <div class="leaderboard-item">
+          <div class="leaderboard-rank">05</div>
+          <div class="leaderboard-user">
+            <div class="post-avatar">CL</div>
+            <span class="post-username">@casey_lee</span>
+          </div>
+          <div class="leaderboard-points">2,670</div>
+        </div>
+      </div>
+
+      <div class="widget">
+        <div class="widget-header">STATS</div>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">12.4k</div>
+            <div class="stat-label">Members</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8.7k</div>
+            <div class="stat-label">Threads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">45.2k</div>
+            <div class="stat-label">Replies</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

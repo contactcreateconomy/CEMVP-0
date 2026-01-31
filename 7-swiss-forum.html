@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATECONOMY // FORUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Helvetica+Now:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Helvetica Now', 'Helvetica Neue', sans-serif;
+      --font-body: 'Helvetica Now', 'Helvetica Neue', sans-serif;
+      --bg-white: #ffffff;
+      --bg-gray: #f5f5f5;
+      --text-ink: #000000;
+      --accent-red: #ff3b30;
+    }
+    body {
+      font-family: var(--font-body); background: var(--bg-white);
+      color: var(--text-ink); line-height: 1.5;
+    }
+    .navbar {
+      border-bottom: 4px solid var(--text-ink); padding: 24px 40px;
+    }
+    .navbar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .navbar-logo {
+      font-family: var(--font-display); font-size: 24px; font-weight: 700;
+      letter-spacing: -1px;
+    }
+    .navbar-logo span { color: var(--accent-red); }
+    .navbar-search { flex: 1; max-width: 400px; margin: 0 40px; }
+    .navbar-search input {
+      width: 100%; padding: 12px 0; font-family: var(--font-body);
+      font-size: 14px; border: none; border-bottom: 2px solid var(--text-ink);
+      background: transparent; outline: none;
+    }
+    .navbar-user {
+      width: 48px; height: 48px; background: var(--text-ink);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: white;
+    }
+    .container {
+      max-width: 1200px; margin: 0 auto; padding: 40px;
+      display: grid; grid-template-columns: 260px 1fr 300px; gap: 24px;
+    }
+    .sidebar-left { position: sticky; top: 80px; height: fit-content; }
+    .btn-primary {
+      width: 100%; padding: 20px 28px; font-family: var(--font-display);
+      font-size: 14px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; background: var(--text-ink); color: white;
+      border: none; cursor: pointer; margin-bottom: 40px;
+    }
+    .categories {
+      border: 2px solid var(--text-ink); padding: 24px;
+    }
+    .categories-header {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);
+      margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--text-muted);
+    }
+    .category-item {
+      display: flex; justify-content: space-between; padding: 16px 0;
+      border-bottom: 1px solid var(--bg-gray); cursor: pointer;
+      font-family: var(--font-display); font-size: 15px; font-weight: 500;
+      transition: all 0.2s;
+    }
+    .category-item:hover { padding-left: 8px; }
+    .category-count { font-weight: 700; }
+    .sort-tabs {
+      display: flex; gap: 0; margin-bottom: 32px; border: 2px solid var(--text-ink);
+    }
+    .sort-tab {
+      flex: 1; padding: 16px 24px; font-family: var(--font-display);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; background: transparent; border: none;
+      border-right: 1px solid var(--text-ink); cursor: pointer;
+    }
+    .sort-tab:last-child { border-right: none; }
+    .sort-tab.active { background: var(--text-ink); color: white; }
+    .post-card {
+      border: 2px solid var(--text-ink); padding: 32px; margin-bottom: 24px;
+    }
+    .post-category {
+      display: inline-block; padding: 6px 14px; background: var(--accent-red);
+      font-family: var(--font-body); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; color: white;
+      margin-bottom: 16px;
+    }
+    .post-title {
+      font-family: var(--font-display); font-size: 28px; font-weight: 700;
+      line-height: 1.1; margin-bottom: 20px; letter-spacing: -0.5px;
+    }
+    .post-title a { color: inherit; text-decoration: none; }
+    .post-title a:hover { text-decoration: underline; }
+    .post-meta {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+      font-size: 13px; color: var(--text-muted); font-weight: 500;
+      border-bottom: 1px solid var(--bg-gray); padding-bottom: 12px;
+    }
+    .post-avatar {
+      width: 36px; height: 36px; background: var(--text-ink);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 14px; color: white;
+    }
+    .post-summary { font-size: 14px; line-height: 1.6; color: var(--text-muted); margin-bottom: 24px; }
+    .post-actions { display: flex; gap: 28px; font-size: 14px; }
+    .vote-btn {
+      width: 40px; height: 40px; display: flex; align-items: center;
+      justify-content: center; background: white; border: 2px solid var(--text-ink);
+      cursor: pointer; font-size: 18px; font-weight: 700;
+    }
+    .vote-btn:hover { background: var(--bg-gray); }
+    .widget {
+      border: 2px solid var(--text-ink); padding: 24px; margin-bottom: 24px;
+    }
+    .widget-header {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted);
+      margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--text-muted);
+    }
+    .leaderboard-item {
+      display: flex; justify-content: space-between; padding: 16px 0;
+      border-bottom: 1px solid var(--bg-gray); font-family: var(--font-display);
+      font-weight: 500;
+    }
+    .leaderboard-rank { font-weight: 700; }
+    .stat-item {
+      text-align: center; padding: 20px; background: var(--bg-gray);
+      border: 1px solid var(--text-ink);
+    }
+    .stat-value {
+      font-family: var(--font-display); font-size: 32px; font-weight: 700;
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+    .grid-overlay {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        linear-gradient(rgba(255,59,48,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,59,48,0.03) 1px, transparent 1px);
+      background-size: 40px 40px; pointer-events: none; z-index: 0;
+    }
+    @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } .sidebar-left, .sidebar-right { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="grid-overlay"></div>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-logo">CREATECONOMY <span>//</span> FORUM</div>
+      <div class="navbar-search"><input type="text" placeholder="Search..."></div>
+      <div class="navbar-user">SC</div>
+    </div>
+  </nav>
+  <div class="container">
+    <aside class="sidebar-left">
+      <button class="btn-primary">+ New</button>
+      <div class="categories">
+        <div class="categories-header">Categories</div>
+        <div class="category-item"><span>💡 General</span><span>1,247</span></div>
+        <div class="category-item"><span>💼 Startups</span><span>856</span></div>
+        <div class="category-item"><span>🎨 Design</span><span>432</span></div>
+        <div class="category-item"><span>💻 Dev</span><span>678</span></div>
+        <div class="category-item"><span>📈 Marketing</span><span>234</span></div>
+      </div>
+    </aside>
+    <main>
+      <div class="sort-tabs">
+        <button class="sort-tab active">Hot</button>
+        <button class="sort-tab">New</button>
+        <button class="sort-tab">Top</button>
+      </div>
+      <article class="post-card">
+        <span class="post-category">General</span>
+        <h2 class="post-title"><a href="#">Building scalable multi-tenant applications with Next.js and Convex</a></h2>
+        <div class="post-meta">
+          <div class="post-avatar">SC</div>
+          <span>Sarah Chen</span>
+          <span>2h ago</span>
+        </div>
+        <p class="post-summary">Explore strategies for implementing tenant isolation at the database level while maintaining code reuse across multiple applications...</p>
+        <div class="post-actions">
+          <button class="vote-btn">▲</button><span>142</span>
+          <button class="vote-btn">▼</button>
+          <span>34 comments</span>
+        </div>
+      </article>
+    </main>
+    <aside class="sidebar-right">
+      <div class="widget">
+        <div class="widget-header">Top Contributors</div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">1</span><span>Sarah Chen</span><span>4,520</span></div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">2</span><span>Jordan Kim</span><span>3,890</span></div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

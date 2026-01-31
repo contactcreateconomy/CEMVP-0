@@ -4,7 +4,8 @@ const isDev = process.env.NODE_ENV === "development";
 
 const nextConfig: NextConfig = {
   reactStrictMode: !isDev,
-  webpack: (config, { isServer }) => {
+  turbopack: {}, // Silence warning about missing turbopack config
+  webpack: (config, { isServer: _isServer }) => {
     // Memory optimization for webpack
     config.optimization = {
       ...config.optimization,
@@ -64,7 +65,7 @@ const nextConfig: NextConfig = {
               "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net",
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               "font-src 'self' https://fonts.gstatic.com",
-              "img-src 'self' data: https://discuss.createconomy.com",
+              "img-src 'self' data: https://discuss.createconomy.com https://images.unsplash.com https://api.dicebear.com",
               "connect-src 'self' https://*.convex.cloud https://*.vercel.com",
               "frame-src 'none'",
               "object-src 'none'",

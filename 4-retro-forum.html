@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATECONOMY // FORUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Press Start 2P', cursive;
+      --font-body: 'VT323', monospace;
+      --bg-dark: #0a0a0a;
+      --cga-cyan: #00ffff;
+      --cga-magenta: #ff00ff;
+      --cga-white: #ffffff;
+      --text-primary: #00ff00;
+    }
+    body {
+      font-family: var(--font-body); background: var(--bg-dark);
+      color: var(--cga-white); line-height: 1.4; font-size: 14px;
+      image-rendering: pixelated;
+    }
+    .navbar {
+      background: var(--bg-dark); border-bottom: 4px solid var(--cga-cyan);
+      padding: 16px; position: sticky; top: 0; z-index: 100;
+    }
+    .navbar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .navbar-logo {
+      font-family: var(--font-display); font-size: 16px; line-height: 1;
+      color: var(--cga-cyan); text-shadow: 2px 2px 0 var(--cga-magenta);
+    }
+    .navbar-logo span { color: var(--cga-magenta); }
+    .navbar-search { flex: 1; max-width: 400px; margin: 0 20px; }
+    .navbar-search input {
+      width: 100%; padding: 10px; font-family: var(--font-body);
+      font-size: 12px; background: #000; border: 2px solid var(--cga-cyan);
+      color: var(--cga-white); outline: none;
+    }
+    .navbar-user {
+      width: 40px; height: 40px; background: var(--cga-magenta);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 12px;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; display: grid; grid-template-columns: 260px 1fr 280px; gap: 20px; }
+    .sidebar-left { position: sticky; top: 70px; height: fit-content; }
+    .btn-primary {
+      width: 100%; padding: 16px; font-family: var(--font-display);
+      font-size: 12px; background: var(--cga-cyan); color: var(--bg-dark);
+      border: 4px solid var(--cga-white); cursor: pointer;
+      margin-bottom: 20px; text-transform: uppercase;
+    }
+    .btn-primary:hover { background: var(--cga-magenta); }
+    .categories {
+      background: #000; border: 4px solid var(--cga-white); padding: 16px;
+    }
+    .categories-header {
+      font-family: var(--font-display); font-size: 10px;
+      text-transform: uppercase; margin-bottom: 16px; padding-bottom: 8px;
+      border-bottom: 2px dashed var(--cga-cyan);
+    }
+    .category-item {
+      display: flex; justify-content: space-between; padding: 10px;
+      border-bottom: 1px dashed var(--cga-magenta); font-size: 12px;
+      cursor: pointer; transition: all 0.1s;
+    }
+    .category-item:hover { background: var(--cga-cyan); color: #000; }
+    .category-count { font-family: var(--font-display); color: var(--cga-cyan); }
+    .sort-tabs { display: flex; gap: 4px; margin-bottom: 20px; }
+    .sort-tab {
+      flex: 1; padding: 12px; font-family: var(--font-display);
+      font-size: 11px; background: #000; border: 2px solid var(--cga-cyan);
+      color: var(--cga-white); cursor: pointer; text-transform: uppercase;
+    }
+    .sort-tab.active { background: var(--cga-cyan); color: #000; }
+    .post-card {
+      background: #000; border: 4px solid var(--cga-white); padding: 20px;
+      margin-bottom: 20px; position: relative;
+    }
+    .post-card::after {
+      content: '>>>'; position: absolute; bottom: 4px; right: 8px;
+      font-family: var(--font-body); font-size: 10px; color: var(--cga-magenta);
+      animation: blink 1s infinite;
+    }
+    @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+    .post-category {
+      display: inline-block; padding: 4px 12px; background: var(--cga-magenta);
+      font-size: 10px; font-weight: bold; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .post-title { font-family: var(--font-display); font-size: 16px; line-height: 1.4; margin-bottom: 12px; }
+    .post-title a { color: var(--cga-cyan); text-decoration: none; }
+    .post-title a:hover { background: var(--cga-cyan); color: #000; }
+    .post-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; font-size: 11px; }
+    .post-avatar {
+      width: 32px; height: 32px; background: var(--cga-cyan);
+      border: 2px solid var(--cga-white); display: flex; align-items: center;
+      justify-content: center; font-size: 10px; font-weight: bold;
+    }
+    .post-summary { font-size: 12px; line-height: 1.6; margin-bottom: 16px; color: var(--cga-white); }
+    .post-actions { display: flex; gap: 16px; }
+    .vote-btn {
+      width: 32px; height: 32px; display: flex; align-items: center;
+      justify-content: center; background: #000; border: 2px solid var(--cga-cyan);
+      cursor: pointer; font-size: 14px;
+    }
+    .vote-btn:hover { background: var(--cga-cyan); color: #000; }
+    .widget { background: #000; border: 4px solid var(--cga-white); padding: 16px; margin-bottom: 20px; }
+    .widget-header {
+      font-family: var(--font-display); font-size: 10px; text-transform: uppercase;
+      margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px dashed var(--cga-cyan);
+    }
+    .leaderboard-item {
+      display: flex; justify-content: space-between; padding: 10px;
+      border-bottom: 1px dashed var(--cga-magenta); font-size: 11px;
+    }
+    .leaderboard-rank { color: var(--cga-cyan); }
+    .stat-item { text-align: center; padding: 12px; border: 2px solid var(--cga-cyan); }
+    .stat-value { font-family: var(--font-display); font-size: 16px; color: var(--cga-cyan); }
+    .stat-label { font-size: 9px; text-transform: uppercase; }
+    .cursor-blink {
+      display: inline-block; width: 10px; height: 14px; background: var(--cga-cyan);
+      animation: blink 1s infinite;
+    }
+    @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } .sidebar-left, .sidebar-right { display: none; } }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-logo">▓ CREATECONOMY <span>FORUM</span></div>
+      <div class="navbar-search"><input type="text" placeholder="SEARCH_>"></div>
+      <div class="navbar-user">SC</div>
+    </div>
+  </nav>
+  <div class="container">
+    <aside class="sidebar-left">
+      <button class="btn-primary">[+] NEW</button>
+      <div class="categories">
+        <div class="categories-header">CATEGORIES_</div>
+        <div class="category-item"><span>💡 GENERAL</span><span class="category-count">[1247]</span></div>
+        <div class="category-item"><span>💼 STARTUPS</span><span class="category-count">[0856]</span></div>
+        <div class="category-item"><span>🎨 DESIGN</span><span class="category-count">[0432]</span></div>
+        <div class="category-item"><span>💻 DEV</span><span class="category-count">[0678]</span></div>
+        <div class="category-item"><span>📈 MARKETING</span><span class="category-count">[0234]</span></div>
+      </div>
+    </aside>
+    <main>
+      <div class="sort-tabs">
+        <button class="sort-tab active">[HOT]</button>
+        <button class="sort-tab">[NEW]</button>
+        <button class="sort-tab">[TOP]</button>
+      </div>
+      <article class="post-card">
+        <span class="post-category">[GENERAL]</span>
+        <h2 class="post-title"><a href="#">>Building scalable multi-tenant applications</a></h2>
+        <div class="post-meta"><div class="post-avatar">SC</div><span>@sarah_chen</span><span>2h_ago</span></div>
+        <p class="post-summary">Explore strategies for implementing tenant isolation at the database level while maintaining code reuse across multiple applications. Architectural patterns for scalable SaaS...</p>
+        <div class="post-actions">
+          <button class="vote-btn">▲</button><span>142</span><button class="vote-btn">▼</button>
+          <span>[34] COMMS</span>
+        </div>
+      </article>
+    </main>
+    <aside class="sidebar-right">
+      <div class="widget">
+        <div class="widget-header">> TOP_CONTRIBUTORS</div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">#1</span><span>sarah_chen</span><span>4520</span></div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">#2</span><span>jordan_kim</span><span>3890</span></div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

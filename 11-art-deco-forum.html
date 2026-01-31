@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATECONOMY // FORUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Cinzel', serif;
+      --font-serif: 'Playfair Display', serif;
+      --font-body: 'Montserrat', sans-serif;
+      --gold-primary: #d4af37;
+      --gold-light: #f4e4bc;
+      --gold-dark: #aa8c2c;
+      --black-rich: #1a1a1a;
+      --black-deep: #0d0d0d;
+      --cream: #faf8f0;
+      --cream-dark: #f0ebe0;
+    }
+    body {
+      font-family: var(--font-body); background: var(--cream);
+      color: var(--black-rich); line-height: 1.6;
+    }
+    .deco-border {
+      border: 3px solid var(--gold-primary);
+      position: relative;
+    }
+    .deco-border::before,
+    .deco-border::after {
+      content: ''; position: absolute; width: 12px; height: 12px;
+      background: var(--gold-primary);
+    }
+    .deco-border::before { top: -6px; left: -6px; }
+    .deco-border::after { bottom: -6px; right: -6px; }
+    .geometric-pattern {
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(212,175,55,0.03) 35px, rgba(212,175,55,0.03) 70px),
+        repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(212,175,55,0.03) 35px, rgba(212,175,55,0.03) 70px);
+      pointer-events: none; z-index: 0;
+    }
+    .navbar {
+      background: linear-gradient(180deg, var(--black-rich) 0%, var(--black-deep) 100%);
+      padding: 28px 40px; border-bottom: 4px solid var(--gold-primary);
+      position: relative;
+    }
+    .navbar::after {
+      content: ''; position: absolute; bottom: -10px; left: 50%; transform: translateX(-50%);
+      width: 200px; height: 8px; background: var(--gold-primary);
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+    }
+    .navbar-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 1; }
+    .navbar-logo {
+      font-family: var(--font-display); font-size: 24px; font-weight: 700;
+      letter-spacing: 6px; color: var(--gold-primary); text-transform: uppercase;
+    }
+    .navbar-logo span { color: var(--cream); }
+    .navbar-search { flex: 1; max-width: 400px; margin: 0 40px; }
+    .navbar-search input {
+      width: 100%; padding: 14px 24px; font-family: var(--font-body);
+      font-size: 13px; background: rgba(255,255,255,0.05);
+      border: 2px solid var(--gold-primary); color: var(--gold-light);
+      outline: none; text-transform: uppercase; letter-spacing: 2px;
+    }
+    .navbar-search input::placeholder { color: rgba(212,175,55,0.4); }
+    .navbar-user {
+      width: 48px; height: 48px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: var(--black-rich); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+    .container {
+      max-width: 1200px; margin: 0 auto; padding: 40px;
+      display: grid; grid-template-columns: 280px 1fr 300px; gap: 32px;
+      position: relative; z-index: 1;
+    }
+    .sidebar-left { position: sticky; top: 80px; height: fit-content; }
+    .btn-primary {
+      width: 100%; padding: 20px 28px; font-family: var(--font-display);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 4px; background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      color: var(--black-rich); border: none; cursor: pointer;
+      margin-bottom: 40px; position: relative;
+      clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px); box-shadow: 0 8px 24px rgba(212,175,55,0.4);
+    }
+    .categories {
+      background: var(--cream-dark); padding: 28px;
+      position: relative;
+    }
+    .categories::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border: 2px solid var(--gold-primary);
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    }
+    .categories-inner { position: relative; z-index: 1; }
+    .categories-header {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px; color: var(--gold-dark);
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 2px solid var(--gold-primary);
+      text-align: center;
+    }
+    .category-item {
+      display: flex; justify-content: space-between; padding: 16px;
+      margin-bottom: 8px; cursor: pointer; font-family: var(--font-body);
+      font-size: 13px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 2px; transition: all 0.3s; border-left: 3px solid transparent;
+    }
+    .category-item:hover {
+      background: var(--gold-primary); color: var(--black-rich);
+      border-left-color: var(--black-rich); padding-left: 20px;
+    }
+    .category-count {
+      font-weight: 700; color: var(--gold-dark);
+    }
+    .sort-tabs { display: flex; gap: 0; margin-bottom: 32px; }
+    .sort-tab {
+      flex: 1; padding: 18px 24px; font-family: var(--font-display);
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 3px; background: var(--cream-dark);
+      border: none; cursor: pointer; transition: all 0.3s;
+      border-left: 2px solid var(--gold-primary);
+    }
+    .sort-tab:first-child { border-left: none; }
+    .sort-tab.active {
+      background: var(--black-rich); color: var(--gold-primary);
+    }
+    .post-card {
+      background: white; padding: 36px; margin-bottom: 24px;
+      position: relative; border: 2px solid var(--gold-primary);
+    }
+    .post-card::before,
+    .post-card::after {
+      content: ''; position: absolute; width: 20px; height: 20px;
+      border: 2px solid var(--gold-primary);
+    }
+    .post-card::before { top: 12px; left: 12px; border-right: none; border-bottom: none; }
+    .post-card::after { bottom: 12px; right: 12px; border-left: none; border-top: none; }
+    .post-category {
+      display: inline-block; padding: 8px 20px; background: var(--black-rich);
+      font-family: var(--font-display); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 3px; color: var(--gold-primary);
+      margin-bottom: 20px;
+    }
+    .post-title {
+      font-family: var(--font-serif); font-size: 26px; font-weight: 700;
+      line-height: 1.3; margin-bottom: 20px; color: var(--black-rich);
+    }
+    .post-title a { color: inherit; text-decoration: none; }
+    .post-title a:hover { color: var(--gold-dark); }
+    .post-meta {
+      display: flex; align-items: center; gap: 16px; margin-bottom: 20px;
+      font-size: 11px; color: var(--gold-dark); font-weight: 600;
+      text-transform: uppercase; letter-spacing: 2px;
+      border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 12px;
+    }
+    .post-avatar {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 12px;
+      color: var(--black-rich);
+    }
+    .post-summary {
+      font-size: 14px; line-height: 1.8; color: var(--black-rich);
+      margin-bottom: 24px; font-weight: 300;
+    }
+    .post-actions { display: flex; gap: 32px; }
+    .vote-btn {
+      width: 44px; height: 44px; display: flex; align-items: center;
+      justify-content: center; background: var(--cream-dark);
+      border: 2px solid var(--gold-primary); cursor: pointer;
+      font-size: 16px; transition: all 0.3s;
+    }
+    .vote-btn:hover { background: var(--gold-primary); }
+    .widget {
+      background: var(--cream-dark); padding: 28px;
+      margin-bottom: 28px; position: relative;
+    }
+    .widget::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      border: 2px solid var(--gold-primary);
+      clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
+    }
+    .widget-inner { position: relative; z-index: 1; }
+    .widget-header {
+      font-family: var(--font-display); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 4px; color: var(--gold-dark);
+      margin-bottom: 24px; padding-bottom: 16px;
+      border-bottom: 2px solid var(--gold-primary);
+      text-align: center;
+    }
+    .leaderboard-item {
+      display: flex; justify-content: space-between; padding: 14px;
+      margin-bottom: 8px; font-family: var(--font-body);
+      font-size: 12px; font-weight: 600; text-transform: uppercase;
+      letter-spacing: 1px; border-bottom: 1px solid rgba(212,175,55,0.2);
+    }
+    .leaderboard-rank { color: var(--gold-dark); }
+    .stat-item {
+      text-align: center; padding: 24px; background: var(--black-rich);
+      color: var(--gold-primary);
+    }
+    .stat-value {
+      font-family: var(--font-serif); font-size: 36px; font-weight: 700;
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-display); font-size: 9px;
+      text-transform: uppercase; letter-spacing: 3px;
+    }
+    .fan-element {
+      position: absolute; width: 60px; height: 30px;
+      border: 2px solid var(--gold-primary); border-radius: 50% 50% 0 0;
+      opacity: 0.2;
+    }
+    @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } .sidebar-left, .sidebar-right { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="geometric-pattern"></div>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-logo">Createconomy <span>Forum</span></div>
+      <div class="navbar-search"><input type="text" placeholder="Search..."></div>
+      <div class="navbar-user">SC</div>
+    </div>
+  </nav>
+  <div class="container">
+    <aside class="sidebar-left">
+      <button class="btn-primary">New Discussion</button>
+      <div class="categories">
+        <div class="categories-inner">
+          <div class="categories-header">Categories</div>
+          <div class="category-item"><span>General</span><span>1,247</span></div>
+          <div class="category-item"><span>Startups</span><span>856</span></div>
+          <div class="category-item"><span>Design</span><span>432</span></div>
+          <div class="category-item"><span>Dev</span><span>678</span></div>
+          <div class="category-item"><span>Marketing</span><span>234</span></div>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <div class="sort-tabs">
+        <button class="sort-tab active">Trending</button>
+        <button class="sort-tab">Recent</button>
+        <button class="sort-tab">Top Rated</button>
+      </div>
+      <article class="post-card">
+        <span class="post-category">General</span>
+        <h2 class="post-title"><a href="#">Building scalable multi-tenant applications with Next.js and Convex</a></h2>
+        <div class="post-meta">
+          <div class="post-avatar">SC</div>
+          <span>Sarah Chen</span>
+          <span>2 Hours Ago</span>
+        </div>
+        <p class="post-summary">Explore strategies for implementing tenant isolation at the database level while maintaining code reuse across multiple applications. The architecture should support graceful degradation and maintain high availability...</p>
+        <div class="post-actions">
+          <button class="vote-btn">▲</button><span>142</span>
+          <button class="vote-btn">▼</button><span>34</span>
+        </div>
+      </article>
+      <article class="post-card">
+        <span class="post-category">Development</span>
+        <h2 class="post-title"><a href="#">How we achieved 99.9% uptime with edge functions</a></h2>
+        <div class="post-meta">
+          <div class="post-avatar">JK</div>
+          <span>Jordan Kim</span>
+          <span>4 Hours Ago</span>
+        </div>
+        <p class="post-summary">A deep dive into our edge deployment strategy, including load balancing patterns and failover mechanisms that ensure maximum availability across all regions...</p>
+        <div class="post-actions">
+          <button class="vote-btn">▲</button><span>89</span>
+          <button class="vote-btn">▼</button><span>22</span>
+        </div>
+      </article>
+    </main>
+    <aside class="sidebar-right">
+      <div class="widget">
+        <div class="widget-inner">
+          <div class="widget-header">Top Contributors</div>
+          <div class="leaderboard-item"><span class="leaderboard-rank">I</span><span>Sarah Chen</span><span>4,520</span></div>
+          <div class="leaderboard-item"><span class="leaderboard-rank">II</span><span>Jordan Kim</span><span>3,890</span></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CREATECONOMY // FORUM</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --font-display: 'Orbitron', sans-serif;
+      --font-body: 'Rajdhani', sans-serif;
+      --bg-dark: #0a0a0a;
+      --neon-pink: #ff006e;
+      --neon-cyan: #00f5d4;
+      --neon-yellow: #ffea00;
+      --text-primary: #ffffff;
+      --text-secondary: #888888;
+    }
+    body {
+      font-family: var(--font-body); background: var(--bg-dark);
+      color: var(--text-primary); line-height: 1.5;
+      background-image:
+        linear-gradient(rgba(0,245,212,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,245,212,0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+    }
+    .navbar {
+      background: rgba(10,10,10,0.95); border-bottom: 2px solid var(--neon-cyan);
+      padding: 16px 32px; box-shadow: 0 0 30px rgba(0,245,212,0.2);
+    }
+    .navbar-inner { max-width: 1400px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .navbar-logo {
+      font-family: var(--font-display); font-size: 24px; font-weight: 700;
+      text-shadow: 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan);
+      letter-spacing: 3px;
+    }
+    .navbar-logo span { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink); }
+    .navbar-search { flex: 1; max-width: 400px; margin: 0 40px; }
+    .navbar-search input {
+      width: 100%; padding: 12px 20px; font-family: var(--font-body);
+      font-size: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--neon-cyan);
+      color: white; outline: none; box-shadow: 0 0 10px rgba(0,245,212,0.3);
+    }
+    .navbar-search input:focus { box-shadow: 0 0 20px rgba(0,245,212,0.5), inset 0 0 10px rgba(0,245,212,0.1); }
+    .navbar-user {
+      width: 48px; height: 48px; border-radius: 4px;
+      background: linear-gradient(135deg, var(--neon-pink), var(--neon-cyan));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 14px;
+      color: var(--bg-dark); box-shadow: 0 0 20px var(--neon-pink);
+    }
+    .container { max-width: 1400px; margin: 0 auto; padding: 32px; display: grid; grid-template-columns: 280px 1fr 320px; gap: 32px; }
+    .sidebar-left { position: sticky; top: 80px; height: fit-content; }
+    .btn-primary {
+      width: 100%; padding: 18px 28px; font-family: var(--font-display);
+      font-size: 14px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; background: transparent; color: var(--neon-cyan);
+      border: 2px solid var(--neon-cyan); cursor: pointer;
+      box-shadow: 0 0 15px rgba(0,245,212,0.3); margin-bottom: 32px;
+      text-shadow: 0 0 10px var(--neon-cyan); transition: all 0.3s;
+    }
+    .btn-primary:hover { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 30px rgba(0,245,212,0.6); }
+    .categories {
+      border: 1px solid var(--neon-pink); padding: 24px;
+      box-shadow: 0 0 20px rgba(255,0,110,0.2); position: relative;
+    }
+    .categories::before {
+      content: ''; position: absolute; top: -1px; left: -1px; right: -1px; bottom: -1px;
+      background: linear-gradient(45deg, var(--neon-pink), transparent, var(--neon-cyan), transparent);
+      z-index: -1; opacity: 0.3; filter: blur(10px);
+    }
+    .categories-header {
+      font-family: var(--font-display); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 3px; color: var(--neon-yellow);
+      text-shadow: 0 0 10px var(--neon-yellow); margin-bottom: 20px;
+    }
+    .category-item {
+      display: flex; justify-content: space-between; padding: 14px;
+      border-bottom: 1px solid rgba(0,245,212,0.2); cursor: pointer;
+      font-family: var(--font-display); font-size: 14px; font-weight: 500;
+      transition: all 0.3s;
+    }
+    .category-item:hover {
+      background: rgba(0,245,212,0.1); padding-left: 20px;
+      text-shadow: 0 0 10px var(--neon-cyan);
+    }
+    .category-count { font-family: var(--font-display); color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+    .sort-tabs { display: flex; gap: 0; margin-bottom: 32px; }
+    .sort-tab {
+      flex: 1; padding: 14px 24px; font-family: var(--font-display);
+      font-size: 12px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 2px; background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0,245,212,0.3); color: var(--neon-cyan);
+      cursor: pointer; transition: all 0.3s;
+    }
+    .sort-tab.active { background: var(--neon-cyan); color: var(--bg-dark); box-shadow: 0 0 30px rgba(0,245,212,0.5); }
+    .post-card {
+      border: 1px solid rgba(0,245,212,0.3); padding: 28px; margin-bottom: 24px;
+      background: rgba(10,10,10,0.8); position: relative;
+      box-shadow: 0 0 30px rgba(0,245,212,0.1); transition: all 0.3s;
+    }
+    .post-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-pink), var(--neon-cyan), transparent);
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .post-card:hover { border-color: var(--neon-cyan); box-shadow: 0 0 40px rgba(0,245,212,0.2); }
+    .post-card:hover::before { opacity: 1; }
+    .post-category {
+      display: inline-block; padding: 6px 14px; border: 1px solid var(--neon-pink);
+      font-family: var(--font-body); font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 2px; color: var(--neon-pink);
+      margin-bottom: 16px; box-shadow: 0 0 10px rgba(255,0,110,0.3);
+    }
+    .post-title {
+      font-family: var(--font-display); font-size: 20px; font-weight: 600;
+      line-height: 1.3; margin-bottom: 16px; color: var(--text-primary);
+    }
+    .post-title a { color: inherit; text-decoration: none; }
+    .post-title a:hover { color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+    .post-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; font-size: 13px; color: var(--text-secondary); }
+    .post-avatar {
+      width: 32px; height: 32px; border: 1px solid var(--neon-cyan);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 11px;
+      box-shadow: 0 0 10px rgba(0,245,212,0.3);
+    }
+    .post-summary { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
+    .post-actions { display: flex; gap: 24px; }
+    .vote-btn {
+      width: 36px; height: 36px; display: flex; align-items: center;
+      justify-content: center; background: rgba(0,0,0,0.5);
+      border: 1px solid rgba(0,245,212,0.3); cursor: pointer;
+      font-size: 16px; transition: all 0.3s;
+    }
+    .vote-btn:hover { background: var(--neon-cyan); border-color: var(--neon-cyan); box-shadow: 0 0 15px var(--neon-cyan); }
+    .widget {
+      border: 1px solid rgba(255,0,110,0.3); padding: 24px; margin-bottom: 24px;
+      background: rgba(10,10,10,0.8); box-shadow: 0 0 30px rgba(255,0,110,0.1);
+    }
+    .widget-header {
+      font-family: var(--font-display); font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 3px; color: var(--neon-yellow);
+      text-shadow: 0 0 10px var(--neon-yellow); margin-bottom: 20px;
+    }
+    .leaderboard-item {
+      display: flex; justify-content: space-between; padding: 14px;
+      border-bottom: 1px solid rgba(0,245,212,0.2); font-family: var(--font-display);
+    }
+    .leaderboard-rank { color: var(--neon-yellow); text-shadow: 0 0 10px var(--neon-yellow); }
+    .stat-item { text-align: center; padding: 16px; border: 1px solid rgba(0,245,212,0.3); }
+    .stat-value { font-family: var(--font-display); font-size: 20px; font-weight: 700; color: var(--neon-cyan); text-shadow: 0 0 10px var(--neon-cyan); }
+    .stat-label { font-size: 10px; text-transform: uppercase; color: var(--text-secondary); }
+    @keyframes scanline {
+      0% { transform: translateY(-100%); } 100% { transform: translateY(100vh); }
+    }
+    .scanline {
+      position: fixed; top: 0; left: 0; width: 100%; height: 2px;
+      background: rgba(0,245,212,0.1); animation: scanline 8s linear infinite;
+      pointer-events: none; z-index: 9999;
+    }
+    @media (max-width: 1100px) { .container { grid-template-columns: 1fr; } .sidebar-left, .sidebar-right { display: none; } }
+  </style>
+</head>
+<body>
+  <div class="scanline"></div>
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <div class="navbar-logo">CYBER<span>//</span>FORUM</div>
+      <div class="navbar-search"><input type="text" placeholder="SEARCH..."></div>
+      <div class="navbar-user">SC</div>
+    </div>
+  </nav>
+  <div class="container">
+    <aside class="sidebar-left">
+      <button class="btn-primary">+ NEW DISCUSSION</button>
+      <div class="categories">
+        <div class="categories-header">CATEGORIES</div>
+        <div class="category-item"><span>💡 GENERAL</span><span class="category-count">1247</span></div>
+        <div class="category-item"><span>💼 STARTUPS</span><span class="category-count">856</span></div>
+        <div class="category-item"><span>🎨 DESIGN</span><span class="category-count">432</span></div>
+        <div class="category-item"><span>💻 DEV</span><span class="category-count">678</span></div>
+        <div class="category-item"><span>📈 MARKETING</span><span class="category-count">234</span></div>
+      </div>
+    </aside>
+    <main>
+      <div class="sort-tabs">
+        <button class="sort-tab active">HOT</button>
+        <button class="sort-tab">NEW</button>
+        <button class="sort-tab">TOP</button>
+      </div>
+      <article class="post-card">
+        <span class="post-category">💡 GENERAL</span>
+        <h2 class="post-title"><a href="#">Building scalable multi-tenant applications with Next.js and Convex</a></h2>
+        <div class="post-meta"><div class="post-avatar">SC</div><span>@sarah_chen</span><span>2h ago</span></div>
+        <p class="post-summary">Explore strategies for implementing tenant isolation at the database level while maintaining code reuse across multiple applications. Architectural patterns for scalable SaaS...</p>
+        <div class="post-actions"><button class="vote-btn">▲</button><span>142</span><button class="vote-btn">▼</button><span>💬 34</span></div>
+      </article>
+    </main>
+    <aside class="sidebar-right">
+      <div class="widget">
+        <div class="widget-header">TOP CONTRIBUTORS</div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">01</span><span>sarah_chen</span><span>4520</span></div>
+        <div class="leaderboard-item"><span class="leaderboard-rank">02</span><span>jordan_kim</span><span>3890</span></div>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>
