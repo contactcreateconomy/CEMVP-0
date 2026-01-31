@@ -1,0 +1,12 @@
+{
+  "version": "1.0.0",
+  "organization": "Createconomy",
+  "date": "January 2026",
+  "abstract": "Project-specific Convex patterns, multi-tenancy design, schema conventions, and function development guidelines. Covers hostname-based tenant detection, data segregation rules, schema design patterns with 8 tables, query/mutation conventions with tenant ownership verification, and development workflow commands. Essential for any work involving the Convex backend in this monorepo.",
+  "references": [
+    "https://docs.convex.dev",
+    "docs/convex-backend.md",
+    "packages/convex/schema.ts",
+    "packages/utils/src/tenant.ts"
+  ]
+}

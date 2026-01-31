@@ -72,6 +72,7 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 
 **Installed Skills** (`.claude/skills/`):
 
+**Vercel Labs Skills:**
 | Skill | Purpose |
 |-------|---------|
 | `composition-patterns` | React composition patterns - compound components, state lifting, avoiding boolean prop proliferation |
@@ -79,6 +80,13 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 | `react-native-skills` | React Native/Expo best practices - performance, layout, animation, state management, platform patterns |
 | `vercel-deploy-claimable` | Deploy to Vercel with claimable URLs - auto-detects 40+ frameworks from package.json |
 | `web-design-guidelines` | Web interface guidelines - 100+ rules covering accessibility, focus states, forms, animation, typography, performance |
+
+**Createconomy Project Skills:**
+| Skill | Purpose |
+|-------|---------|
+| `convex-best-practices` | Convex backend patterns - multi-tenancy design, schema conventions, function development, tenant ownership verification |
+| `monorepo-workflow` | Turborepo patterns - shared packages, cross-package development, workspace conventions, CI/CD pipeline |
+| `shadcn-best-practices` | Shadcn UI patterns - component composition, theming, accessibility, form patterns with react-hook-form & Zod |
 
 ## Important Notes
 
