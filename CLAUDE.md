@@ -108,13 +108,6 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 | `convex-security-audit` | Deep security review patterns |
 | `convex-component-authoring` | Creating reusable Convex components |
 
-**Createconomy Project Skills:**
-| Skill | Purpose |
-|-------|---------|
-| `monorepo-workflow` | Turborepo patterns - shared packages, cross-package development, workspace conventions, CI/CD pipeline |
-| `shadcn-best-practices` | Shadcn UI patterns - component composition, theming, accessibility, form patterns with react-hook-form & Zod |
-| `avoid-feature-creep` | Prevent scope creep during development |
-
 ## Important Notes
 
 - **Windows**: All apps use --webpack flag (Turbopack compatibility)
