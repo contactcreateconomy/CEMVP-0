@@ -123,6 +123,36 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 |-------|---------|
 | `avoid-feature-creep` | Prevent scope creep during development |
 
+**Anthropic Official Skills:**
+
+| Skill | Purpose |
+|-------|---------|
+| `frontend-design` | Avoids "AI slop" - bold design decisions for React & Tailwind |
+| `web-artifacts-builder` | Build React + Tailwind + shadcn/ui HTML artifacts |
+| `webapp-testing` | Test local web apps with Playwright |
+| `mcp-builder` | Create high-quality MCP servers |
+| `skill-creator` | Interactive skill creation tool |
+| `algorithmic-art` | Generative art with p5.js |
+| `canvas-design` | Design visual art in .png/.pdf |
+| `theme-factory` | Create custom design themes |
+| `brand-guidelines` | Apply Anthropic brand colors/typography |
+| `template-skill` | Template for creating custom skills |
+
+**Document Skills:**
+| Skill | Purpose |
+|-------|---------|
+| `docx` | Word documents with tracked changes, comments |
+| `pdf` | PDF extraction, creation, merge/split |
+| `pptx` | PowerPoint presentations with layouts, templates |
+| `xlsx` | Excel spreadsheets with formulas, formatting |
+
+**Communication Skills:**
+| Skill | Purpose |
+|-------|---------|
+| `doc-coauthoring` | Write internal communications, reports |
+| `internal-comms` | Status reports, newsletters, FAQs |
+| `slack-gif-creator` | Animated GIFs for Slack |
+
 ## Important Notes
 
 - **Windows**: All apps use --webpack flag (Turbopack compatibility)

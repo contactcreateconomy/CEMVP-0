@@ -17,7 +17,8 @@
     "convex:dev": "cd packages/convex && pnpm exec convex dev",
     "convex:deploy": "cd packages/convex && convex deploy",
     "convex:typecheck": "cd packages/convex && convex typecheck",
-    "skills:update": "npx skills add vercel-labs/agent-skills -a claude-code --yes && npx skills add vercel-labs/next-skills -a claude-code --yes && npx @waynesutton/convex-skills install-all",
+    "skills:update": "npx skills add anthropics/skills -a claude-code --yes && npx skills add vercel-labs/agent-skills -a claude-code --yes && npx skills add vercel-labs/next-skills -a claude-code --yes && npx @waynesutton/convex-skills install-all",
+    "skills:update:anthropic": "npx skills add anthropics/skills -a claude-code --yes",
     "skills:update:vercel": "npx skills add vercel-labs/agent-skills -a claude-code --yes && npx skills add vercel-labs/next-skills -a claude-code --yes",
     "skills:update:next": "npx skills add vercel-labs/next-skills -a claude-code --yes",
     "skills:update:convex": "npx @waynesutton/convex-skills install-all"

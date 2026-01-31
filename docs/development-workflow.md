@@ -78,17 +78,24 @@ Skills are AI-consumable instructions that extend Claude's capabilities for this
 pnpm skills:update
 ```
 
-Updates Vercel Labs skills, Next skills, and Convex skills to their latest versions.
+Updates Anthropic, Vercel Labs, Next, and Convex skills to their latest versions.
 
 ### Update Individual Skill Sets
 
 ```bash
+pnpm skills:update:anthropic # Update Anthropic official skills only
 pnpm skills:update:vercel    # Update Vercel Labs skills only
 pnpm skills:update:next      # Update Next skills only
 pnpm skills:update:convex    # Update Convex skills only
 ```
 
 ### Installed Skills
+
+**Anthropic Official (17 skills):**
+- frontend-design, web-artifacts-builder, webapp-testing, mcp-builder
+- skill-creator, algorithmic-art, canvas-design, theme-factory
+- brand-guidelines, template-skill, docx, pdf, pptx, xlsx
+- doc-coauthoring, internal-comms, slack-gif-creator
 
 **Vercel Labs (5 skills):**
 - composition-patterns, react-best-practices, react-native-skills
@@ -102,6 +109,9 @@ pnpm skills:update:convex    # Update Convex skills only
 - convex-schema-validator, convex-file-storage, convex-agents
 - convex-cron-jobs, convex-http-actions, convex-migrations
 - convex-security-check, convex-security-audit, convex-component-authoring
+
+**Other (1):**
+- avoid-feature-creep
 
 ## Build & Quality Commands
 
