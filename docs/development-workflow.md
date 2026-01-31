@@ -68,6 +68,37 @@ pnpm convex:typecheck
 
 Verifies that your Convex schema and functions are type-safe.
 
+## Claude Code Skills
+
+Skills are AI-consumable instructions that extend Claude's capabilities for this project.
+
+### Update All Skills
+
+```bash
+pnpm skills:update
+```
+
+Updates both Vercel Labs skills and Convex skills to their latest versions.
+
+### Update Individual Skill Sets
+
+```bash
+pnpm skills:update:vercel    # Update Vercel Labs skills only
+pnpm skills:update:convex    # Update Convex skills only
+```
+
+### Installed Skills
+
+**Vercel Labs (5 skills):**
+- composition-patterns, react-best-practices, react-native-skills
+- vercel-deploy-claimable, web-design-guidelines
+
+**Convex (13 skills):**
+- convex, convex-best-practices, convex-functions, convex-realtime
+- convex-schema-validator, convex-file-storage, convex-agents
+- convex-cron-jobs, convex-http-actions, convex-migrations
+- convex-security-check, convex-security-audit, convex-component-authoring
+
 ## Build & Quality Commands
 
 ### Build
