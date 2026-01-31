@@ -68,7 +68,17 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 - **frontend-design** - UI component generation
 - **playwright** - E2E testing
 
-**MCP Servers**: Configured in `~/.claude.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, shadcn)
+**MCP Servers** (configured in `~/.claude.json`, see `docs/tools-integration.md`):
+
+| Server | Purpose |
+|--------|---------|
+| `convex` | Database operations, schema queries |
+| `github` | PRs, issues, repo operations (requires GITHUB_TOKEN) |
+| `memory` | Project knowledge graph |
+| `context7` | Live documentation lookup (requires CONTEXT7_API_KEY) |
+| `shadcn` | UI component discovery and installation |
+| `filesystem` | File operations |
+| `sequential-thinking` | Chain-of-thought reasoning |
 
 **Installed Skills** (`.claude/skills/`):
 
