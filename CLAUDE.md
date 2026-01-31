@@ -84,6 +84,7 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 **Installed Skills** (`.claude/skills/`):
 
 **Vercel Labs Skills:**
+
 | Skill | Purpose |
 |-------|---------|
 | `vercel-composition-patterns` | React composition patterns - compound components, state lifting, avoiding boolean prop proliferation |
@@ -91,6 +92,14 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 | `vercel-react-native-skills` | React Native/Expo best practices - performance, layout, animation, state management, platform patterns |
 | `vercel-deploy-claimable` | Deploy to Vercel with claimable URLs - auto-detects 40+ frameworks from package.json |
 | `web-design-guidelines` | Web interface guidelines - 100+ rules covering accessibility, focus states, forms, animation, typography, performance |
+
+**Next Skills:**
+
+| Skill | Purpose |
+|-------|---------|
+| `next-best-practices` | Next.js framework patterns - file conventions, RSC boundaries, async APIs, data patterns, route handlers (background skill) |
+| `next-cache-components` | Next.js 16 Cache Components and PPR - `use cache`, `cacheLife()`, `cacheTag()`, cache invalidation |
+| `next-upgrade` | Next.js version upgrades - automated migration with codemods, breaking changes review |
 
 **Convex Skills** (@waynesutton/convex-skills):
 | Skill | Purpose |

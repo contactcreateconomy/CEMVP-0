@@ -78,12 +78,13 @@ Skills are AI-consumable instructions that extend Claude's capabilities for this
 pnpm skills:update
 ```
 
-Updates both Vercel Labs skills and Convex skills to their latest versions.
+Updates Vercel Labs skills, Next skills, and Convex skills to their latest versions.
 
 ### Update Individual Skill Sets
 
 ```bash
 pnpm skills:update:vercel    # Update Vercel Labs skills only
+pnpm skills:update:next      # Update Next skills only
 pnpm skills:update:convex    # Update Convex skills only
 ```
 
@@ -92,6 +93,9 @@ pnpm skills:update:convex    # Update Convex skills only
 **Vercel Labs (5 skills):**
 - composition-patterns, react-best-practices, react-native-skills
 - vercel-deploy-claimable, web-design-guidelines
+
+**Next (3 skills):**
+- next-best-practices (background), next-cache-components, next-upgrade
 
 **Convex (13 skills):**
 - convex, convex-best-practices, convex-functions, convex-realtime
