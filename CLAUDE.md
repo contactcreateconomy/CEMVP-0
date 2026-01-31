@@ -70,6 +70,16 @@ All data segregated by `tenantId`. Tenant detection via `getTenantFromHostname()
 
 **MCP Servers**: Configured in `~/.claude.json` (7 servers: memory, github, convex, context7, sequential-thinking, filesystem, shadcn)
 
+**Installed Skills** (`.claude/skills/`):
+
+| Skill | Purpose |
+|-------|---------|
+| `composition-patterns` | React composition patterns - compound components, state lifting, avoiding boolean prop proliferation |
+| `react-best-practices` | React/Next.js performance optimization - 40+ rules across 8 categories (waterfalls, bundle size, server/client performance) |
+| `react-native-skills` | React Native/Expo best practices - performance, layout, animation, state management, platform patterns |
+| `vercel-deploy-claimable` | Deploy to Vercel with claimable URLs - auto-detects 40+ frameworks from package.json |
+| `web-design-guidelines` | Web interface guidelines - 100+ rules covering accessibility, focus states, forms, animation, typography, performance |
+
 ## Important Notes
 
 - **Windows**: All apps use --webpack flag (Turbopack compatibility)
