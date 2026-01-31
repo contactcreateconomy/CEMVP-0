@@ -84,7 +84,7 @@ Turborepo handles the build order based on package dependencies.
 pnpm test                # Run tests (Vitest)
 ```
 
-**Note**: Tests are configured but not yet written. Use the `/tdd` skill when adding new features.
+**Note**: Tests are configured but not yet written.
 
 ### Lint
 
@@ -156,15 +156,16 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 
 ### Commits
 
-Use the `/commit` skill for properly formatted commits:
-```bash
-/commit
+Use conventional commit format:
+```
+type(scope): description
+
+[optional body]
+
+[optional footer]
 ```
 
-The skill will:
-- Stage appropriate files
-- Generate a commit message following conventional commits
-- Include co-authorship attribution
+Types: feat, fix, docs, style, refactor, test, chore
 
 ### Before Committing
 
@@ -181,11 +182,11 @@ The skill will:
 
 ### Adding a New Feature
 
-1. **Plan**: Use `/plan` skill for complex features
-2. **Test**: Use `/tdd` skill for test-driven development
+1. **Plan**: Design the feature architecture
+2. **Test**: Write tests for the new functionality
 3. **Implement**: Write code following patterns from existing features
 4. **Verify**: Run type-check, lint, build
-5. **Commit**: Use `/commit` skill
+5. **Commit**: Use conventional commit format
 
 ### Fixing a Bug
 
@@ -193,14 +194,13 @@ The skill will:
 2. **Reproduce**: Confirm the bug exists
 3. **Fix**: Make minimal changes to fix the issue
 4. **Test**: Verify the fix works and doesn't break other features
-5. **Commit**: Use `/commit` skill
+5. **Commit**: Use conventional commit format
 
 ### Working with Convex
 
 1. **Read docs**: Read `docs/convex-backend.md`
-2. **Use skill**: Invoke `/convex-development` skill for guidance
-3. **Type check**: Run `pnpm convex:typecheck` after schema changes
-4. **Test locally**: Use `pnpm convex:dev` during development
+2. **Type check**: Run `pnpm convex:typecheck` after schema changes
+3. **Test locally**: Use `pnpm convex:dev` during development
 
 ### Adding UI Components
 
@@ -243,9 +243,6 @@ The skill will:
 
 ## Getting Help
 
-- **Convex questions**: Use `/convex-development` skill
-- **Planning help**: Use `/plan` skill for complex features
-- **Testing help**: Use `/tdd` skill for test-driven development
-- **Security review**: Use `everything-claude-code:security-review` skill
+- **Documentation**: See `docs/tools-integration.md` for available tools
+- **Convex**: See `docs/convex-backend.md` for Convex-specific guidance
 
-See `docs/tools-integration.md` for a complete list of available skills and tools.

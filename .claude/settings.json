@@ -1,20 +1,4 @@
 {
-  "enabledPlugins": {
-    "everything-claude-code@everything-claude-code": true,
-    "frontend-design@claude-plugins-official": true,
-    "playwright@claude-plugins-official": true
-  },
-  "enableAllProjectMcpServers": false,
-  "enabledMcpjsonServers": [
-    "memory",
-    "github",
-    "convex",
-    "context7",
-    "sequential-thinking",
-    "filesystem",
-    "shadcn"
-  ],
-  "disabledMcpjsonServers": [],
   "permissions": {
     "allow": [
       "Bash(pnpm run *)",
@@ -42,12 +26,6 @@
       "Write(*.md)",
       "Write(*.json)"
     ],
-    "ask": [
-      "Bash(git push)",
-      "Bash(pnpm convex:deploy)",
-      "Edit(./.env*)",
-      "Bash(pnpm install)"
-    ],
     "deny": [
       "Bash(curl *)",
       "Bash(rm -rf *)",
@@ -60,6 +38,16 @@
       "Write(./.env*)",
       "Write(.env)",
       "Read(./.claude/settings.local.json)"
+    ],
+    "ask": [
+      "Bash(git push)",
+      "Bash(pnpm convex:deploy)",
+      "Edit(./.env*)",
+      "Bash(pnpm install)"
     ]
+  },
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true,
+    "playwright@claude-plugins-official": true
   }
 }
